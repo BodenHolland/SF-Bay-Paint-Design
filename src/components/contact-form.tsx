@@ -11,7 +11,7 @@ const INTENTS = [
   "Commercial painting",
   "Stucco / siding repair",
   "Cabinet repainting",
-  "Drywall / carpentry",
+  "Drywall repair",
   "Power washing only",
   "Become a vendor",
   "Other",

@@ -17,7 +17,6 @@ SF Bay Paint & Design is the painting arm of operator Leslie Burnley, who also r
 - [Home](${base}/): Overview of services, the estimator, and the property-manager track.
 - [Services](${base}/services): Full catalog of painting trades — interior and exterior, grouped by category.
 ${SERVICES.map((s) => `- [${s.title}](${base}/services/${s.slug}): ${s.summary}`).join("\n")}
-- [Locations](${base}/locations): Counties served across the SF Bay Area.
 - [About](${base}/about): Operator background, vendor packet, response SLA, and how a portfolio engagement runs. Includes a property-manager section anchored at #property-managers.
 - [Contact](${base}/contact): Reach out about a job or onboard us as a vendor.
 

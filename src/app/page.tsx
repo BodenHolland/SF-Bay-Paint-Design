@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { Reveal } from "@/components/reveal";
-import { TiltLink } from "@/components/tilt-link";
-import { StatsBand } from "@/components/stats-band";
 import { JsonLd } from "@/components/json-ld";
 import { getSiteUrl } from "@/lib/site-url";
 import { businessLd, websiteLd, faqLd } from "@/lib/structured-data";
@@ -19,6 +17,14 @@ import {
   TRUST,
   servicesByCategory,
 } from "@/lib/site";
+
+const WORK_PHOTOS = [
+  { src: "/photos/work/exterior.jpg", alt: "Exterior repaint" },
+  { src: "/photos/work/kitchen.jpg", alt: "Kitchen interior" },
+  { src: "/photos/work/alta-street.jpg", alt: "Alta Street project" },
+  { src: "/photos/work/dining-area.jpg", alt: "Dining area interior" },
+  { src: "/photos/work/marketing.jpg", alt: "Recent project" },
+];
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -41,10 +47,11 @@ export default function Home() {
       <SiteHeader />
       <main id="main-content" tabIndex={-1} className="flex-1">
         <Hero />
-        <TrustBand />
-        <ServicesBlock />
-        <CaseStudies />
+        <Services />
+        <Work />
+        <Trust />
         <ForPm />
+        <Locations />
         <Testimonials />
         <Faq />
         <CtaBand />
@@ -57,69 +64,51 @@ export default function Home() {
 /* ── Hero ─────────────────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-line/60">
-      <div className="mx-auto w-full max-w-6xl px-6 pb-24 pt-24 md:pt-32">
-        <div className="grid items-end gap-10 lg:grid-cols-[1.4fr_1fr]">
-          <div>
-            <p className="eyebrow rise" style={{ animationDelay: "0.05s" }}>
-              Painting · Turnovers · Bay Area portfolios
-            </p>
-            <h1
-              className="rise mt-6 text-balance text-5xl font-light leading-[1.02] tracking-tight md:text-7xl"
-              style={{ animationDelay: "0.15s" }}
+    <section className="mx-auto w-full max-w-6xl px-6 pb-16 pt-12 md:pb-24 md:pt-16">
+      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="rise relative aspect-[4/5] w-full overflow-hidden lg:aspect-[5/6]">
+          <Image
+            src="/photos/hero.jpg"
+            alt="SF Bay Paint & Design — completed project"
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover"
+          />
+        </div>
+        <div>
+          <h1
+            className="rise text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl"
+            style={{ animationDelay: "0.1s" }}
+          >
+            The Bay Area&rsquo;s painting and turnover crew.
+          </h1>
+          <p
+            className="rise mt-6 max-w-xl text-base leading-relaxed text-foreground/75 md:text-lg"
+            style={{ animationDelay: "0.2s" }}
+          >
+            Interior, exterior, and unit turnovers for property managers,
+            landlords, and building owners. Run by an operator who manages her
+            own portfolio, so the scopes, timing, and paperwork match how
+            property managers actually work.
+          </p>
+          <div
+            className="rise mt-9 flex flex-wrap items-center gap-x-5 gap-y-4"
+            style={{ animationDelay: "0.3s" }}
+          >
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
             >
-              Painting & turnovers, built for property portfolios.
-            </h1>
-            <p
-              className="rise mt-7 max-w-xl text-lg leading-relaxed text-foreground/80"
-              style={{ animationDelay: "0.3s" }}
+              Contact us for a quote
+            </Link>
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-foreground transition-colors hover:text-gold"
             >
-              Interior, exterior, and unit turnovers across the San Francisco
-              Bay Area. Run by an operator who manages her own portfolio, so
-              the scopes, timing, and paperwork match how property managers
-              actually work.
-            </p>
-            <div
-              className="rise mt-10 flex flex-wrap items-center gap-x-5 gap-y-7"
-              style={{ animationDelay: "0.45s" }}
-            >
-              <TiltLink
-                href="/contact"
-                max={5}
-                scale={1.02}
-                className="inline-flex items-center gap-3 bg-gold px-8 py-3.5 text-sm uppercase tracking-[0.18em] text-background hover:bg-gold-bright"
-              >
-                Contact us for a quote
-              </TiltLink>
-              <Link
-                href="/about#property-managers"
-                className="group inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-foreground/85 transition-colors hover:text-gold-bright"
-              >
-                <span className="swipe-underline">For property managers</span>
-                <span
-                  aria-hidden
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </Link>
-            </div>
-          </div>
-
-          {/* Decorative swatch block — three brand neutrals plus the
-              champagne accent. Reads industrial, not editorial. */}
-          <div className="rise hidden lg:block" style={{ animationDelay: "0.6s" }}>
-            <div
-              aria-hidden
-              className="grid grid-cols-3 border border-line/60"
-            >
-              <div className="aspect-[2/3] bg-[var(--charcoal)]" />
-              <div className="aspect-[2/3] bg-[var(--muted)]/50" />
-              <div className="aspect-[2/3] bg-gold/80" />
-            </div>
-            <p className="mt-3 text-xs uppercase tracking-[0.22em] text-muted">
-              Show up · Paint it · On schedule
-            </p>
+              <span className="swipe-underline">More about us</span>
+              <span aria-hidden>→</span>
+            </Link>
           </div>
         </div>
       </div>
@@ -127,151 +116,133 @@ function Hero() {
   );
 }
 
-/* ── Trust band ───────────────────────────────────────────────────── */
-function TrustBand() {
+/* ── Services ────────────────────────────────────────────────────────
+   Three-up photo cards per CertaPro / M&B layout: kitchen-style cards
+   with the service title as a centered overlay label. Grouped by
+   category with section headers. Placeholders for real photos. */
+function Services() {
   return (
-    <StatsBand
-      stats={[
-        { value: TRUST.cslb, label: "California contractors license" },
-        { value: TRUST.insurance, label: "General liability coverage" },
-        { value: TRUST.yearsOperating, label: "Bay Area operator" },
-      ]}
-    />
-  );
-}
-
-/* ── Services (flat catalog grouped by category) ──────────────────── */
-function ServicesBlock() {
-  return (
-    <section id="services" className="mx-auto w-full max-w-6xl px-6 py-24">
-      <Reveal>
-        <div className="border-b border-line/60 pb-8">
-          <p className="eyebrow">What we do</p>
-          <h2 className="mt-4 text-3xl font-light tracking-tight md:text-5xl">
-            The painting trades, done at portfolio scale.
+    <section id="services" className="bg-charcoal/40">
+      <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+            Our services include
           </h2>
         </div>
-      </Reveal>
 
-      {CATEGORIES.map((cat, ci) => {
-        const items = servicesByCategory(cat.key);
-        return (
-          <div key={cat.key} className={ci === 0 ? "mt-12" : "mt-16"}>
-            <Reveal>
+        {CATEGORIES.map((cat) => {
+          const items = servicesByCategory(cat.key);
+          return (
+            <div key={cat.key} className="mt-16">
               <p className="eyebrow">{cat.eyebrow}</p>
-              <h3 className="mt-3 text-2xl font-light tracking-tight md:text-3xl">
+              <h3 className="mt-3 text-2xl font-bold tracking-tight md:text-3xl">
                 {cat.title} painting
               </h3>
-            </Reveal>
-            <div className="mt-8 grid gap-px border border-line/60 bg-line/60 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map((s, i) => (
-                <Reveal key={s.slug} delay={(i % 3) * 80}>
+              <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {items.map((s) => (
                   <Link
+                    key={s.slug}
                     href={`/services/${s.slug}`}
-                    className="group flex h-full flex-col bg-background p-7 transition-colors hover:bg-charcoal/40"
+                    className="group relative block aspect-[4/5] overflow-hidden"
                   >
-                    <p className="text-sm uppercase tracking-[0.14em] text-gold transition-colors group-hover:text-gold-bright">
-                      {s.title}
-                    </p>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground/80">
-                      {s.summary}
-                    </p>
-                    <p className="mt-5 inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-foreground/60">
-                      <span className="swipe-underline">Learn more</span>
-                      <span
+                    {s.photo ? (
+                      <Image
+                        src={s.photo}
+                        alt={s.title}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                    ) : (
+                      <div
+                        className="photo-ph absolute inset-0"
+                        data-label={s.title}
                         aria-hidden
-                        className="transition-transform duration-300 group-hover:translate-x-1"
-                      >
-                        →
-                      </span>
-                    </p>
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent transition-opacity group-hover:from-black/80" />
+                    <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                      <p className="text-xl font-bold tracking-tight md:text-2xl">
+                        {s.title}
+                      </p>
+                      <p className="mt-1 text-sm leading-snug text-white/85">
+                        {s.summary.split(".")[0]}.
+                      </p>
+                    </div>
                   </Link>
-                </Reveal>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
 
-      <Reveal delay={150}>
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-6 border-t border-line/60 pt-8">
+        <div className="mt-16 flex justify-center">
           <Link
             href="/services"
-            className="group inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-gold transition-colors hover:text-gold-bright"
+            className="inline-flex items-center justify-center bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
           >
-            <span className="swipe-underline">Full services catalog</span>
-            <span
-              aria-hidden
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            >
-              →
-            </span>
-          </Link>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-3 bg-gold px-8 py-3.5 text-sm uppercase tracking-[0.18em] text-background transition-colors hover:bg-gold-bright"
-          >
-            Contact us for a quote
+            View all services
           </Link>
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }
 
-/* ── Case studies (placeholders) ──────────────────────────────────── */
-const CASE_STUDIES = [
-  {
-    headline: "18 units, 12 days",
-    meta: "Multi-family turnover · Marin",
-    detail:
-      "Two crews running in parallel. All units back on market before the lease cycle.",
-  },
-  {
-    headline: "32,000 sqft exterior",
-    meta: "Low-rise commercial · SF",
-    detail:
-      "Power wash, prep, two coats. Single weather window, on schedule.",
-  },
-  {
-    headline: "Common areas, occupied building",
-    meta: "Multi-family · East Bay",
-    detail:
-      "Lobby, halls, stairwells repainted around residents. Zero callback.",
-  },
-];
-
-function CaseStudies() {
+/* ── Recent work ──────────────────────────────────────────────────── */
+function Work() {
   return (
-    <section className="border-t border-line/60 bg-charcoal/30">
-      <div className="mx-auto w-full max-w-6xl px-6 py-24">
-        <Reveal>
-          <div className="border-b border-line/60 pb-8">
-            <p className="eyebrow">Recent work</p>
-            <h2 className="mt-4 text-3xl font-light tracking-tight md:text-5xl">
-              Numbers, not pretty rooms.
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">
-              Three representative jobs. Real case studies and PM logos go here
-              once we get permission from clients to publish them.
+    <section className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
+      <div className="text-center">
+        <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+          Our work
+        </h2>
+        <p className="mx-auto mt-4 max-w-xl text-sm text-muted">
+          A few recent jobs across the Bay Area.
+        </p>
+      </div>
+      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {WORK_PHOTOS.map((p, i) => (
+          <div
+            key={p.src}
+            className={`relative overflow-hidden ${
+              i === 0 ? "aspect-[4/5] lg:row-span-2 lg:aspect-[3/4]" : "aspect-[4/3]"
+            }`}
+          >
+            <Image
+              src={p.src}
+              alt={p.alt}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ── Trust band ───────────────────────────────────────────────────── */
+function Trust() {
+  const stats = [
+    { v: TRUST.cslb, l: "California contractors license" },
+    { v: TRUST.insurance, l: "General liability coverage" },
+    { v: TRUST.yearsOperating, l: "Bay Area operator" },
+  ];
+  return (
+    <section className="border-y border-line">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 divide-y divide-line px-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        {stats.map((s) => (
+          <div key={s.l} className="px-4 py-10 text-center sm:py-14">
+            <div className="text-2xl font-bold tabular-nums text-foreground md:text-3xl">
+              {s.v}
+            </div>
+            <p className="mx-auto mt-3 max-w-[16rem] text-sm text-muted">
+              {s.l}
             </p>
           </div>
-        </Reveal>
-        <div className="mt-12 grid gap-px bg-line/60 sm:grid-cols-3">
-          {CASE_STUDIES.map((c, i) => (
-            <Reveal key={c.headline} delay={i * 110}>
-              <div className="h-full bg-background p-8">
-                <p className="eyebrow text-muted">{c.meta}</p>
-                <p className="mt-5 text-3xl font-light tracking-tight tabular-nums text-foreground">
-                  {c.headline}
-                </p>
-                <p className="mt-4 text-sm leading-relaxed text-muted">
-                  {c.detail}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        ))}
       </div>
     </section>
   );
@@ -280,64 +251,78 @@ function CaseStudies() {
 /* ── For Property Managers ────────────────────────────────────────── */
 function ForPm() {
   return (
-    <section className="mx-auto w-full max-w-6xl px-6 py-24">
-      <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-        <Reveal>
-          <div>
-            <p className="eyebrow">For property managers</p>
-            <h2 className="mt-4 text-balance text-3xl font-light tracking-tight md:text-5xl">
-              Built by an operator who turns her own portfolio.
-            </h2>
-            <p className="mt-6 text-base leading-relaxed text-foreground/80">
-              We&rsquo;ve been on your side of the table. Scopes are written so
-              your accounting can drop them in. Timelines match a lease cycle.
-              Crews respect an occupied building.
-            </p>
-            <div className="mt-9">
-              <Link
-                href="/about#property-managers"
-                className="group inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-gold transition-colors hover:text-gold-bright"
-              >
-                <span className="swipe-underline">See how we work with PMs</span>
-                <span
-                  aria-hidden
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </Link>
-            </div>
-          </div>
-        </Reveal>
-        <Reveal delay={150}>
-          <ul className="grid grid-cols-1 gap-px border border-line/60 bg-line/60 sm:grid-cols-2">
-            <li className="bg-background p-7">
-              <p className="eyebrow">Response SLA</p>
-              <p className="mt-4 text-2xl font-light tracking-tight text-foreground">
-                {TRUST.responseSla}
-              </p>
+    <section className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
+      <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <Image
+            src="/photos/operator.jpg"
+            alt="SF Bay Paint & Design — operator"
+            fill
+            sizes="(max-width: 1024px) 100vw, 55vw"
+            className="object-cover"
+          />
+        </div>
+        <div>
+          <h2 className="text-3xl font-bold leading-tight tracking-tight md:text-5xl">
+            Built by an operator who turns her own portfolio.
+          </h2>
+          <p className="mt-6 text-base leading-relaxed text-foreground/75 md:text-lg">
+            We&rsquo;ve been on the property-manager side of the table. Scopes
+            are written so your accounting can drop them in. Timelines match a
+            lease cycle. Crews respect an occupied building.
+          </p>
+          <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
+            <li>
+              <p className="font-bold uppercase tracking-wider text-gold">Response SLA</p>
+              <p className="mt-1 text-foreground/85">{TRUST.responseSla}</p>
             </li>
-            <li className="bg-background p-7">
-              <p className="eyebrow">Volume</p>
-              <p className="mt-4 text-2xl font-light tracking-tight text-foreground">
-                {TRUST.unitsPainted}
-              </p>
+            <li>
+              <p className="font-bold uppercase tracking-wider text-gold">Volume</p>
+              <p className="mt-1 text-foreground/85">{TRUST.unitsPainted}</p>
             </li>
-            <li className="bg-background p-7">
-              <p className="eyebrow">Vendor packet</p>
-              <p className="mt-4 text-base leading-relaxed text-muted">
-                W-9, COI, contractor license, references. One PDF, sent on
-                request.
-              </p>
+            <li>
+              <p className="font-bold uppercase tracking-wider text-gold">Billing</p>
+              <p className="mt-1 text-foreground/85">PO-friendly, net-30</p>
             </li>
-            <li className="bg-background p-7">
-              <p className="eyebrow">Billing</p>
-              <p className="mt-4 text-base leading-relaxed text-muted">
-                PO-friendly. Net-30 on portfolio work, card on smaller jobs.
-              </p>
+            <li>
+              <p className="font-bold uppercase tracking-wider text-gold">Vendor packet</p>
+              <p className="mt-1 text-foreground/85">W-9, COI, license, references</p>
             </li>
           </ul>
-        </Reveal>
+          <Link
+            href="/about#property-managers"
+            className="mt-10 inline-flex items-center justify-center bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
+          >
+            More about us
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Locations ────────────────────────────────────────────────────── */
+function Locations() {
+  return (
+    <section className="border-y border-line">
+      <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
+        <div className="text-center">
+          <p className="eyebrow">Where we work</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+            Across the SF Bay Area.
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm text-muted">
+            Most work concentrates in Marin and San Francisco. Crews travel across
+            the counties below.
+          </p>
+        </div>
+        <ul className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-x-6 gap-y-3 text-base text-foreground/80">
+          {LOCATIONS.map((county) => (
+            <li key={county} className="tabular-nums">
+              {county} County
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -346,36 +331,26 @@ function ForPm() {
 /* ── Testimonials ─────────────────────────────────────────────────── */
 function Testimonials() {
   return (
-    <section className="border-t border-line/60 bg-charcoal/30">
-      <div className="mx-auto w-full max-w-6xl px-6 py-24">
-        <Reveal>
-          <div className="max-w-2xl border-b border-line/60 pb-8">
-            <p className="eyebrow">In their words</p>
-            <h2 className="mt-4 text-3xl font-light tracking-tight md:text-5xl">
-              What clients are saying.
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted">
-              Placeholder quotes. We&rsquo;ll swap these for real, named
-              references once we have permission from PMs and landlords to
-              publish their feedback.
-            </p>
-          </div>
-        </Reveal>
-        <div className="mt-12 grid gap-px bg-line/60 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.author + i} delay={i * 110}>
-              <figure className="h-full bg-background p-8">
-                <span aria-hidden className="font-display text-5xl leading-none text-gold/70">
-                  &ldquo;
-                </span>
-                <blockquote className="mt-2 text-lg font-light leading-snug tracking-tight text-foreground">
-                  {t.quote}
-                </blockquote>
-                <figcaption className="mt-6 text-xs uppercase tracking-[0.18em] text-muted">
-                  {t.author} · {t.meta}
-                </figcaption>
-              </figure>
-            </Reveal>
+    <section className="bg-charcoal/40">
+      <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
+        <h2 className="text-center text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+          Satisfied customers
+        </h2>
+        <p className="mx-auto mt-4 max-w-xl text-center text-sm text-muted">
+          Placeholder quotes. We&rsquo;ll swap these for real, named references
+          once we have permission from PMs and landlords to publish their feedback.
+        </p>
+        <div className="mt-14 grid grid-cols-1 gap-12 md:grid-cols-3">
+          {TESTIMONIALS.map((t) => (
+            <figure key={t.author} className="text-center">
+              <blockquote className="text-base leading-relaxed text-foreground/85">
+                &ldquo;{t.quote}&rdquo;
+              </blockquote>
+              <figcaption className="mt-6 text-base font-bold text-gold">
+                {t.author}
+              </figcaption>
+              <p className="mt-1 text-xs text-muted">{t.meta}</p>
+            </figure>
           ))}
         </div>
       </div>
@@ -386,23 +361,16 @@ function Testimonials() {
 /* ── FAQ ──────────────────────────────────────────────────────────── */
 function Faq() {
   return (
-    <section className="mx-auto w-full max-w-3xl px-6 py-24">
-      <Reveal>
-        <div className="text-center">
-          <p className="eyebrow">Questions</p>
-          <h2 className="mt-4 text-3xl font-light tracking-tight md:text-5xl">
-            Frequently asked
-          </h2>
-        </div>
-      </Reveal>
+    <section className="mx-auto w-full max-w-3xl px-6 py-20 md:py-28">
+      <h2 className="text-center text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+        Frequently asked
+      </h2>
       <div className="mt-12">
         {FAQS.map((f, i) => (
-          <Reveal key={f.q} delay={i * 60}>
-            <details className="faq" open={i === 0}>
-              <summary className="font-normal tracking-tight">{f.q}</summary>
-              <p className="pb-6 text-base leading-relaxed text-muted">{f.a}</p>
-            </details>
-          </Reveal>
+          <details key={f.q} className="faq" open={i === 0}>
+            <summary>{f.q}</summary>
+            <p className="pb-6 text-base leading-relaxed text-muted">{f.a}</p>
+          </details>
         ))}
       </div>
     </section>
@@ -412,41 +380,29 @@ function Faq() {
 /* ── Closing CTA ──────────────────────────────────────────────────── */
 function CtaBand() {
   return (
-    <section className="border-t border-line/60 bg-charcoal/30">
-      <div className="mx-auto w-full max-w-6xl px-6 py-28 text-center">
-        <Reveal>
-          <p className="eyebrow">Next step</p>
-        </Reveal>
-        <Reveal delay={100}>
-          <h2 className="mx-auto mt-5 max-w-2xl text-balance text-4xl font-light leading-tight tracking-tight md:text-6xl">
-            Have a property to repaint?
-          </h2>
-        </Reveal>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-5">
-          <Reveal delay={150}>
-            <TiltLink
-              href="/contact"
-              max={5}
-              scale={1.02}
-              className="inline-flex items-center gap-3 bg-gold px-8 py-3.5 text-sm uppercase tracking-[0.18em] text-background hover:bg-gold-bright"
-            >
-              Contact us for a quote
-            </TiltLink>
-          </Reveal>
-          <Reveal delay={300}>
-            <Link
-              href="/services"
-              className="group inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-foreground/85 transition-colors hover:text-gold-bright"
-            >
-              <span className="swipe-underline">Browse services</span>
-              <span
-                aria-hidden
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              >
-                →
-              </span>
-            </Link>
-          </Reveal>
+    <section className="bg-foreground">
+      <div className="mx-auto w-full max-w-6xl px-6 py-20 text-center md:py-24">
+        <h2 className="mx-auto max-w-2xl text-balance text-3xl font-bold leading-tight tracking-tight text-background md:text-5xl">
+          Have a property to repaint?
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-base text-background/75">
+          Quotes go out within 48 hours of a walk-through or a complete email
+          request.
+        </p>
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-5">
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center bg-gold px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold-bright"
+          >
+            Contact us for a quote
+          </Link>
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-background/85 transition-colors hover:text-gold-bright"
+          >
+            <span className="swipe-underline">Browse services</span>
+            <span aria-hidden>→</span>
+          </Link>
         </div>
       </div>
     </section>

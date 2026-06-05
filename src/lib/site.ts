@@ -27,12 +27,10 @@ export const LEGAL = {
 };
 
 export const CONTACT = {
-  // Shared with the rental side for now. Swap to paint@ / design@ when Leslie
-  // sets up a dedicated inbox.
   phone: "(415) 326-4129",
   phoneHref: "tel:+14153264129",
-  email: "leasing@sfbayrentalco.com",
-  emailHref: "mailto:leasing@sfbayrentalco.com",
+  email: "hello@sfbaypaintdesign.com",
+  emailHref: "mailto:hello@sfbaypaintdesign.com",
 };
 
 export const SOCIALS = [
@@ -46,7 +44,6 @@ export const SOCIALS = [
 // quote requests for now.
 export const NAV = [
   { label: "Services", href: "/services" },
-  { label: "Locations", href: "/locations" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -92,6 +89,9 @@ export type Service = {
   category: ServiceCategory;
   summary: string;
   body: string;
+  // Optional cover photo for the service card / detail hero. Path under /public.
+  // Services without a photo fall back to the .photo-ph placeholder.
+  photo?: string;
 };
 
 export const SERVICES: Service[] = [
@@ -135,6 +135,7 @@ export const SERVICES: Service[] = [
     summary:
       "Strip, sand, stain. Restoring weathered redwood and cedar without replacing the boards.",
     body: "Decks and fences in Marin and the Bay weather fast. We strip old finish, sand back to clean wood, and apply transparent, semi-transparent, or solid stain depending on how the boards look and how often you want to refinish. Deck rebuilds and board replacement are handled by partners we trust if the structure isn't worth saving.",
+    photo: "/photos/services/deck-staining.jpg",
   },
   {
     slug: "epa-lead-safe",
@@ -153,6 +154,7 @@ export const SERVICES: Service[] = [
     summary:
       "Walls, ceilings, doors, and trim. Patch, prime, two coats of mid-grade professional paint. Cut by hand.",
     body: "Interior painting is the workhorse service: unit turnovers, multi-family common areas (lobbies, halls, stairwells, amenity rooms), and commercial interiors. We patch and prime, then apply two coats of mid-grade professional paint (Benjamin Moore Regal or Sherwin Williams SuperPaint). Walls cut and rolled, ceilings sprayed where appropriate, trim painted by hand.",
+    photo: "/photos/services/interior-painting.jpg",
   },
   {
     slug: "cabinet-repainting",
@@ -161,6 +163,7 @@ export const SERVICES: Service[] = [
     summary:
       "Kitchen and bath cabinets refinished between tenancies. Sanded, primed, and sprayed for a smooth, durable finish.",
     body: "Cabinets are some of the most touched surfaces in a unit, and replacing them between tenancies isn't always worth it. We refinish kitchen and bath cabinets: degrease, sand, prime with a bonding primer, and spray a durable finish coat in a controlled space. The result holds up to daily use without looking like a cheap repaint.",
+    photo: "/photos/services/cabinet-repainting.jpg",
   },
   {
     slug: "drywall-repair",
@@ -169,14 +172,7 @@ export const SERVICES: Service[] = [
     summary:
       "Holes, water damage, settling cracks: patched, taped, textured to match before paint goes on.",
     body: "Standard part of any unit turnover. We patch holes from screws and anchors, address water damage and bubbled tape, repair settling cracks, and re-texture the patch to match the surrounding wall before paint. We can also handle larger repairs — medium-to-large holes that need a backing board, sections of failed drywall, and water-damaged areas after the moisture source is fixed.",
-  },
-  {
-    slug: "light-carpentry",
-    title: "Light Carpentry",
-    category: "interior",
-    summary:
-      "Trim replacement, door and door-frame repair, wood rot, banister fixes. Handled in-house so paint-adjacent work doesn't get punted.",
-    body: "Paint and trim work go together. Our crews handle the light carpentry that turns up on every painting job: damaged baseboards and casing, broken door frames, banister and stair spindle repair, kitchen cabinet door fixes, and small areas of wood rot. Anything beyond what a paint crew should handle, we tell you up front.",
+    photo: "/photos/services/drywall-repair.jpg",
   },
   {
     slug: "wallpaper-removal",
@@ -185,14 +181,6 @@ export const SERVICES: Service[] = [
     summary:
       "Steam, strip, skim coat, paint. We take dated units to rent-ready without a full renovation.",
     body: "Wallpaper removal is one of the more painful prep jobs in the trade — done badly, it leaves a wall that no paint can hide. We score, steam, strip, and skim coat the wall before any paint goes on. Older Bay Area units often have layers; we plan for that in the scope.",
-  },
-  {
-    slug: "concrete-epoxy",
-    title: "Concrete & Epoxy",
-    category: "interior",
-    summary:
-      "Stained concrete and epoxy floor coatings for garages, basements, light commercial, and amenity rooms.",
-    body: "Concrete staining adds dimension to garage floors, basements, and exposed slab in amenity rooms. Epoxy coatings make the same surfaces dramatically more durable and easier to clean. Our crews surface-prep, etch where required, and apply stains or epoxy systems suited to the use — vehicle traffic, foot traffic, or wet areas.",
   },
 ];
 

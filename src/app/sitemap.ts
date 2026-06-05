@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/site-url";
-import { LOCATIONS, SERVICES } from "@/lib/site";
+import { SERVICES } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();
@@ -9,7 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const root: MetadataRoute.Sitemap = [
     { url: `${base}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: `${base}/services`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${base}/locations`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
   ];
@@ -21,12 +20,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  const counties: MetadataRoute.Sitemap = LOCATIONS.map((c) => ({
-    url: `${base}/locations/${c.toLowerCase().replace(/\s+/g, "-")}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
-
-  return [...root, ...services, ...counties];
+  return [...root, ...services];
 }
