@@ -1,0 +1,623 @@
+@import "tailwindcss";
+
+/* ── SF Bay Rental Co. — design tokens ──────────────────────────────
+   Boutique luxury, "new-age" sophisticated. Black / champagne gold / warm grey.
+   Gold (matched to the logo) is a thread — lines, labels, hovers — never a fill.
+   Neutrals lean slightly warm for the "romantic" feel. */
+:root {
+  --background: #0e0e10; /* near-black, faintly warm */
+  --foreground: #f4f1ea; /* warm white */
+  --charcoal: #1c1b1e; /* section depth */
+  --muted: #908a80; /* warm mid grey */
+  --line: #2b2a2e; /* hairline on dark */
+  --gold: #c7a06a; /* champagne gold — matched to logo */
+  --gold-bright: #ddbe8c; /* hover / emphasis */
+  /* Let height animate to/from `auto` so the FAQ accordion can grow smoothly
+     (used by details.faq::details-content below). Supported where available;
+     a no-op elsewhere. */
+  interpolate-size: allow-keywords;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-charcoal: var(--charcoal);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --font-sans: var(--font-grotesk);
+}
+
+/* Smooth in-page scrolling for anchor links. Turned on via JS (data-smooth)
+   only after the first load settles, so the browser's scroll restoration on
+   refresh stays instant instead of animating (see SmoothScroll component). */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-smooth="true"] {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ── View transitions: cross-fade between routes ────────────────────
+   Route navigations animate via React's <ViewTransition> (see layout.tsx),
+   so old content fades out and new content fades in instead of hard-cutting
+   (and the scroll-to-top reset no longer reads as a glitchy jump). Soften the
+   default cross-fade easing; disable it entirely under reduced motion (ADA). */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 340ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* The admin panel opts out of the public site's smooth scrolling and route
+   cross-fade. Navigating between long admin pages otherwise animates the
+   scroll-to-top (the page appears to lurch) and cross-fades the whole view —
+   both feel wrong in a tool. Keyed off the [data-admin] marker in the admin
+   layout, so it covers the /admin path and the admin.* subdomain alike. */
+html:has([data-admin]) {
+  scroll-behavior: auto !important;
+}
+html:has([data-admin])::view-transition-group(*),
+html:has([data-admin])::view-transition-old(*),
+html:has([data-admin])::view-transition-new(*) {
+  animation: none !important;
+}
+
+/* Admin content fades + lifts in once it resolves after the loading skeleton,
+   instead of hard-cutting. The skeleton itself (which carries `animate-pulse`)
+   is excluded so it keeps pulsing until the real content swaps in. */
+@keyframes adminFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .admin-content > *:not(.animate-pulse) {
+    animation: adminFadeIn 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+/* Selected text picks up the champagne gold. */
+::selection {
+  background-color: var(--gold);
+  color: var(--background);
+}
+
+/* ── Focus visibility (WCAG 2.4.7) ──────────────────────────────────
+   A consistent, high-contrast champagne focus ring for keyboard users on
+   every interactive element. Unlayered so it overrides Tailwind's layered
+   `outline-none` utilities (which several inputs set to suppress the native
+   ring); :focus-visible means mouse clicks don't show it, only keyboard /
+   programmatic focus. The dual-thumb range slider opts out via its own
+   `.range-input:focus` rule (higher specificity) since the focus belongs on
+   the thumb, not the full-width track. */
+:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+}
+/* The <main> landmark receives focus programmatically (skip link / route
+   change); never show a ring on the wrapper itself. */
+main:focus,
+main:focus-visible {
+  outline: none;
+}
+
+/* ── Skip to content link ───────────────────────────────────────────
+   Off-screen until focused, then pinned top-left so a keyboard user can jump
+   straight to <main> past the sticky header. */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transform: translateY(-120%);
+  background: var(--gold);
+  color: var(--background);
+  padding: 0.65rem 1.1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 0.18s ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--background);
+  outline-offset: -4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}
+
+/* Tailwind v4 no longer sets a pointer cursor on buttons by default. */
+button:not(:disabled),
+[role="button"],
+select,
+summary {
+  cursor: pointer;
+}
+
+/* No horizontal scroll on mobile. Decorative absolutely-positioned bits
+   (centered tooltips, full-bleed overlays, hover popovers) and the odd
+   wide track can push the scrollable width a hair past the viewport,
+   letting the page drag left/right on touch. Clip it at the root.
+   `clip` (not `hidden`) does NOT establish a scroll container, so the
+   sticky header and in-page anchor scrolling keep working; leaving
+   overflow-y untouched means it stays `visible` (no scroll container on
+   either axis). */
+html,
+body {
+  overflow-x: clip;
+}
+
+/* ── Signature background: romantic dark gradient + static pinstripes ──
+   Pinstripes are fixed (do not scroll with content), per Leslie's reference.
+   Painted on a position:fixed pseudo-element rather than `background-attachment:
+   fixed` on <body> — the latter forces the browser to repaint the whole
+   background on every scroll frame (a notorious scroll-jank source, especially
+   on macOS). A fixed layer is composited once and just stays put, so scrolling
+   stays buttery. */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(244, 241, 234, 0.016) 0px,
+      rgba(244, 241, 234, 0.016) 1px,
+      transparent 1px,
+      transparent 8px
+    ),
+    radial-gradient(
+      130% 90% at 50% -15%,
+      #2b2630 0%,
+      #17151b 42%,
+      var(--background) 100%
+    );
+}
+
+/* Small, wide-tracked uppercase label — the luxury cue */
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+/* ── Motion ────────────────────────────────────────────────────────
+   On-load staggered rise for the hero (always runs). */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* .reveal is a hook for future scroll-in effects. It must never hide content,
+   so it is intentionally a no-op (content always visible). */
+.reveal {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Tilt button (cursor-reactive 3D lean + gold sheen) ─────────────── */
+.tilt {
+  position: relative;
+  overflow: hidden;
+  transform: perspective(700px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+    scale(var(--s, 1));
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.2),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.tilt:hover::before {
+  opacity: 1;
+}
+/* Tilt without the cursor-following highlight (keeps the 3D lean only). */
+.tilt.no-sheen::before {
+  display: none;
+}
+
+/* ── Swipe underline: grows L→R on hover, retracts L→R on leave ─────── */
+.swipe-underline {
+  position: relative;
+}
+.swipe-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.2em;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right; /* leave: collapses toward the right */
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+a:hover > .swipe-underline::after,
+.swipe-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left; /* enter: draws in from the left */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt {
+    transform: none !important;
+  }
+  .tilt::before {
+    display: none;
+  }
+}
+
+/* ── Testimonials ticker ────────────────────────────────────────────
+   A single row drifts slowly; hovering eases it to a smooth stop (motion is
+   driven in JS — see ReviewsTicker). Clipped horizontally so the wide track
+   never causes page scroll, but vertically visible so a card's hover popover
+   (full review) can overflow. Under reduced motion the row holds still and
+   becomes manually scrollable, and the duplicate set is hidden. */
+.marquee {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .marquee-dup {
+    display: none;
+  }
+}
+
+/* Entrance: the first time the ticker scrolls into view its cards fade and
+   rise in (matching the site's Reveal animation), staggered left-to-right,
+   then the drift takes over. */
+.tk-card {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.tk-in .tk-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tk-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── FAQ accordion (native details/summary, no JS) ─────────────────── */
+details.faq {
+  border-bottom: 1px solid var(--line);
+}
+details.faq summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  font-size: 1.075rem;
+}
+details.faq summary::-webkit-details-marker {
+  display: none;
+}
+details.faq summary::after {
+  content: "+";
+  color: var(--gold);
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+details.faq[open] summary::after {
+  content: "–";
+}
+
+/* Smoothly grow/shrink the answer (height: auto ↔ 0 via interpolate-size on
+   :root) and rotate the +/– marker. Motion is opt-in: under reduced motion the
+   accordion snaps open/closed instantly (no ::details-content transition runs,
+   and the marker transition above is overridden below). */
+@media (prefers-reduced-motion: no-preference) {
+  details.faq::details-content {
+    height: 0;
+    opacity: 0;
+    overflow: clip;
+    transition:
+      height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      content-visibility 0.4s allow-discrete;
+  }
+  details.faq[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
+  details.faq summary::after {
+    transform: rotate(0deg);
+  }
+  /* Marker stays "+" glyph; rotate it 45° so it reads as a clean × → – feel. */
+  details.faq[open] summary::after {
+    transform: rotate(180deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  details.faq summary::after {
+    transition: none;
+  }
+}
+
+/* ── Dual-range price slider ─────────────────────────────────────────
+   Two range inputs overlaid; the input track is non-interactive and only the
+   thumbs are grabbable, so both thumbs work independently (see RangeSlider). */
+.range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 0;
+  margin: 0;
+  background: transparent;
+  pointer-events: none;
+}
+.range-input:focus {
+  outline: none;
+}
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: auto;
+  height: 18px;
+  width: 18px;
+  border-radius: 9999px;
+  background: var(--gold);
+  border: 2px solid var(--background);
+  box-shadow:
+    0 0 0 1px var(--gold),
+    0 1px 4px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
+}
+.range-input::-webkit-slider-thumb:hover {
+  background: var(--gold-bright);
+  transform: scale(1.08);
+}
+.range-input::-moz-range-thumb {
+  pointer-events: auto;
+  height: 18px;
+  width: 18px;
+  border-radius: 9999px;
+  background: var(--gold);
+  border: 2px solid var(--background);
+  cursor: pointer;
+}
+.range-input::-webkit-slider-runnable-track,
+.range-input::-moz-range-track {
+  background: transparent;
+  border: none;
+}
+
+/* iOS Safari gives <input type="date"> an intrinsic content width and ignores
+   width:100%, so the "Desired move-in date" field rendered narrower than its
+   siblings on mobile. Scope an appearance reset to iOS (WebKit) so the date box
+   fills its column there, while desktop keeps the native calendar control. */
+@supports (-webkit-touch-callout: none) {
+  input[type="date"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+  }
+}
+
+/* ── Properties map (Leaflet, dark theme) ───────────────────────────── */
+.leaflet-container {
+  background: var(--charcoal);
+  font-family: inherit;
+}
+/* Leaflet 1.9.4 sets `mix-blend-mode: plus-lighter` on every tile (a Chromium
+   seam-antialiasing workaround). Against our near-black container that blends
+   the dark basemap tiles down to black, so force normal compositing. (The other
+   half of the historical "black map" bug — tiles collapsing to 0px wide — was
+   the `leaflet-container` class getting stripped off the map element by a React
+   re-render; that's fixed in properties-map.tsx by keeping the root's className
+   stable, after which Leaflet's own `max-width: none` handles tile sizing.) */
+.leaflet-tile {
+  mix-blend-mode: normal !important;
+}
+/* Gold rent "pin" — a pill anchored on the coordinate. */
+.map-pin {
+  display: inline-block;
+  transform: translate(-50%, -50%);
+  background: var(--gold);
+  color: var(--background);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.map-pin:hover {
+  background: var(--gold-bright);
+}
+.map-pin.is-rented {
+  background: var(--muted);
+  color: var(--background);
+}
+/* The currently previewed listing — brighter, lifted, with a soft gold ring. */
+.map-pin.is-selected {
+  background: var(--gold-bright);
+  color: var(--background);
+  transform: translate(-50%, -50%) scale(1.14);
+  box-shadow:
+    0 0 0 3px rgba(201, 162, 93, 0.45),
+    0 6px 16px rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+/* Map preview pane — gentle rise/fade when its content swaps. */
+@keyframes pane-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.pane-rise {
+  animation: pane-rise 0.45s ease-out both;
+}
+/* Popup card */
+.leaflet-popup-content-wrapper {
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 0;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
+}
+.leaflet-popup-content {
+  margin: 0;
+  width: 220px !important;
+}
+.leaflet-popup-tip {
+  background: var(--background);
+  border: 1px solid var(--line);
+}
+.leaflet-popup-close-button {
+  color: var(--muted) !important;
+  padding: 6px 8px 0 0 !important;
+}
+.map-pop {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.map-pop img {
+  display: block;
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+.map-pop-body {
+  padding: 10px 12px 12px;
+}
+.map-pop-loc {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+}
+.map-pop-title {
+  margin-top: 4px;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+}
+.map-pop-rent {
+  margin-top: 4px;
+  color: var(--gold);
+}
+/* Controls + attribution tuned to the dark theme */
+.leaflet-control-attribution {
+  background: rgba(14, 14, 16, 0.7) !important;
+  color: var(--muted) !important;
+}
+.leaflet-control-attribution a {
+  color: var(--muted) !important;
+}
+.leaflet-bar a {
+  background: var(--charcoal) !important;
+  color: var(--foreground) !important;
+  border-color: var(--line) !important;
+}
+.leaflet-bar a:hover {
+  background: var(--line) !important;
+}
+
+/* ── Themed search clear button ─────────────────────────────────────
+   Replace the browser's off-theme (blue) native search "x" with a muted
+   champagne-gold one that brightens on hover. */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 15px;
+  width: 15px;
+  margin-left: 6px;
+  cursor: pointer;
+  background-color: var(--muted);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  transition: background-color 0.15s ease;
+}
+input[type="search"]:hover::-webkit-search-cancel-button,
+input[type="search"]:focus::-webkit-search-cancel-button {
+  background-color: var(--gold-bright);
+}
