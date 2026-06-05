@@ -54,20 +54,7 @@ export default async function About() {
             route. The About page is now the home for PM-facing context. */}
         <section id="property-managers" className="border-t border-line/60 bg-charcoal/30">
           <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
-            <div className="max-w-3xl">
-              <p className="eyebrow">For property managers</p>
-              <h2 className="mt-4 text-balance text-3xl font-light tracking-tight md:text-5xl lg:text-6xl">
-                A painter who has been on your side of the table.
-              </h2>
-              <p className="mt-6 text-base leading-relaxed text-foreground/80">
-                SF Bay Paint &amp; Design is run by an operator who also
-                manages residential property across the Bay. Scopes are written
-                for your accounting, timing matches a lease cycle, and crews
-                respect an occupied building.
-              </p>
-            </div>
-
-            <div className="mt-12 grid grid-cols-1 gap-px border border-line/60 bg-line/60 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-px border border-line/60 bg-line/60 sm:grid-cols-3">
               <div className="bg-background p-7">
                 <p className="eyebrow">Response SLA</p>
                 <p className="mt-3 text-2xl font-light tracking-tight text-foreground">
