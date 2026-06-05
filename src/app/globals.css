@@ -35,6 +35,18 @@
   }
 }
 
+/* Sticky header is ~112px tall on mobile and ~152px on desktop after the
+   logo size bump. Reserve that space whenever an anchor or focus call
+   scrolls something into view, so the target never lands behind the header. */
+html {
+  scroll-padding-top: 7rem;
+}
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 10rem;
+  }
+}
+
 /* Cross-fade between routes — softer and a touch slower than the
    browser default so route changes feel deliberate, not snappy. */
 @media (prefers-reduced-motion: no-preference) {
