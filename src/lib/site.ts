@@ -103,6 +103,7 @@ export const SERVICES: Service[] = [
     summary:
       "Stucco, wood, vinyl, aluminum, brick, and cedar shingles. The right primer for each substrate, two coats over real prep, finished on schedule.",
     body: "Our crews paint every exterior substrate common in the Bay Area, including stucco, wood siding, vinyl, aluminum, brick, cedar shingles, garage doors, and trim. Each surface gets the right primer and two coats of mid-grade professional paint. We work in weather windows that don't compromise the finish, and we document the job with before-and-after photos that go with the invoice.",
+    photo: "/photos/services/exterior-painting.jpg",
   },
   {
     slug: "power-washing",
@@ -111,6 +112,7 @@ export const SERVICES: Service[] = [
     summary:
       "Required prep on every exterior job. Removes dirt, mildew, chalking, and failing paint so the new coat actually bonds.",
     body: "Power washing is the first step on every exterior repaint we do. We remove dirt, mildew, chalking, and any old paint that's already failing, so the new coat bonds to a clean surface. We also offer standalone power-washing for buildings that aren't ready for paint but need their siding and walkways cleaned.",
+    photo: "/photos/services/power-washing.jpg",
   },
   {
     slug: "stucco-repair",
@@ -119,6 +121,7 @@ export const SERVICES: Service[] = [
     summary:
       "Patch cracks, address EIFS, then paint. Common in the Bay; we don't subcontract this out and we don't paint over a substrate that's about to fail.",
     body: "Stucco and EIFS (synthetic stucco) are everywhere in Bay Area buildings, and both fail in predictable ways. We patch cracks, address spalling, and repair EIFS using the right material for the substrate, then prime and paint. We don't paint over stucco that's actively failing — we fix it first or tell you what's needed before paint goes on.",
+    photo: "/photos/services/stucco-repair.jpg",
   },
   {
     slug: "siding-restoration",
@@ -127,6 +130,7 @@ export const SERVICES: Service[] = [
     summary:
       "Vinyl, aluminum, and Hardie siding. The right primer for each substrate so the paint doesn't chip off a year later.",
     body: "Painting vinyl and aluminum siding is its own skill — wrong primer and the paint peels in a season. Our crews use bonding primers and exterior acrylics rated for the substrate, with the right surface prep so the finish actually lasts. The same applies to Hardie and other cementitious siding.",
+    photo: "/photos/services/siding-restoration.jpg",
   },
   {
     slug: "deck-staining",
@@ -173,6 +177,7 @@ export const SERVICES: Service[] = [
     summary:
       "Steam, strip, skim coat, paint. We take dated units to rent-ready without a full renovation.",
     body: "Wallpaper removal is one of the more painful prep jobs in the trade — done badly, it leaves a wall that no paint can hide. We score, steam, strip, and skim coat the wall before any paint goes on. Older Bay Area units often have layers; we plan for that in the scope.",
+    photo: "/photos/services/wallpaper-removal.jpg",
   },
 ];
 
