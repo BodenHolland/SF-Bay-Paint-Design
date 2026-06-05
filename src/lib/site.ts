@@ -42,11 +42,10 @@ export const SOCIALS = [
   { label: "YouTube", href: "https://www.youtube.com/c/SFBayRentalCo" },
 ] as const;
 
-// Top-level navigation. B2B-oriented; the estimator is the primary funnel,
-// the vendor / property-manager content lives on the About page.
+// Top-level navigation. No standalone estimator route; the contact page handles
+// quote requests for now.
 export const NAV = [
   { label: "Services", href: "/services" },
-  { label: "Estimate", href: "/estimate" },
   { label: "Locations", href: "/locations" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -76,77 +75,130 @@ export const TRUST = {
   responseSla: "Quotes within 48 hours",
 };
 
-// Two service categories, each with a list of sub-services. Inspired by the
-// CertaPro catalog (interior + exterior with the same prep / finish trades
-// bundled in), rewritten in this site's B2B voice.
-export const SERVICES = [
+// Service categories — used for the grouping headers on the homepage and the
+// services index, and as the eyebrow on each service detail page.
+export type ServiceCategory = "exterior" | "interior";
+export const CATEGORIES: { key: ServiceCategory; title: string; eyebrow: string }[] = [
+  { key: "exterior", title: "Exterior", eyebrow: "Exterior services" },
+  { key: "interior", title: "Interior", eyebrow: "Interior services" },
+];
+
+// Flat catalog of distinct services. Mirrors the CertaPro landing-page
+// catalog (one card per service, no nesting), rewritten in our B2B operator
+// voice. Color Consultation is intentionally dropped: we don't do design help.
+export type Service = {
+  slug: string;
+  title: string;
+  category: ServiceCategory;
+  summary: string;
+  body: string;
+};
+
+export const SERVICES: Service[] = [
+  // ── Exterior ────────────────────────────────────────────────────────
   {
-    slug: "interior",
-    title: "Interior Painting",
-    eyebrow: "Service 01",
-    summary:
-      "Unit turnovers, multi-family common areas, and commercial interiors. Walls, trim, drywall, and cabinets handled by the same crew, same scope.",
-    subservices: [
-      {
-        title: "Interior painting",
-        body: "Walls, ceilings, doors, and trim. Patch, prime, two coats of mid-grade professional paint. Walls cut and rolled; trim painted by hand.",
-      },
-      {
-        title: "Cabinet repainting",
-        body: "Kitchen and bath cabinets refinished between tenancies. Sanded, primed, and sprayed in a controlled space for a smooth, durable finish.",
-      },
-      {
-        title: "Drywall repair",
-        body: "Holes, water damage, settling cracks: patched, taped, and textured to match the surrounding wall before paint goes on.",
-      },
-      {
-        title: "Light carpentry",
-        body: "Trim replacement, door and door-frame repair, wood rot, banister fixes. Handled in-house so paint-adjacent work doesn't get punted to another vendor.",
-      },
-      {
-        title: "Wallpaper removal",
-        body: "Steam, strip, skim coat, paint. We take older units from dated to rent-ready without a full renovation.",
-      },
-      {
-        title: "Concrete & epoxy",
-        body: "Stained concrete and epoxy floor coatings for garages, basements, light commercial spaces, and amenity rooms.",
-      },
-    ],
-  },
-  {
-    slug: "exterior",
+    slug: "exterior-painting",
     title: "Exterior Painting",
-    eyebrow: "Service 02",
+    category: "exterior",
     summary:
-      "Low and mid-rise multi-family, commercial buildings, and single-family exteriors. Prep, coat, hit the weather window, document the work.",
-    subservices: [
-      {
-        title: "Exterior painting",
-        body: "Stucco, wood, vinyl, aluminum, brick, and cedar shingles. The right primer for each substrate, two coats over proper prep, finished on schedule.",
-      },
-      {
-        title: "Power washing",
-        body: "Standard prep on every exterior job. Removes dirt, mildew, chalking, and failing paint so the new coat actually bonds and lasts.",
-      },
-      {
-        title: "Stucco & EIFS repair",
-        body: "Patch cracks, address EIFS, then paint. Common in the Bay; we don't subcontract this out and we don't paint over a substrate that's about to fail.",
-      },
-      {
-        title: "Siding restoration",
-        body: "Vinyl, aluminum, and Hardie siding. The right primer for each substrate so the paint doesn't chip off a year later.",
-      },
-      {
-        title: "Deck & fence staining",
-        body: "Strip, sand, stain. Restoring weathered redwood and cedar without replacing the boards.",
-      },
-      {
-        title: "EPA lead-safe",
-        body: "Older Bay Area buildings often have lead-based paint. Our crews follow EPA RRP lead-safe work practices on any job that disturbs it.",
-      },
-    ],
+      "Stucco, wood, vinyl, aluminum, brick, and cedar shingles. The right primer for each substrate, two coats over real prep, finished on schedule.",
+    body: "Our crews paint every exterior substrate common in the Bay Area, including stucco, wood siding, vinyl, aluminum, brick, cedar shingles, garage doors, and trim. Each surface gets the right primer and two coats of mid-grade professional paint. We work in weather windows that don't compromise the finish, and we document the job with before-and-after photos that go with the invoice.",
   },
-] as const;
+  {
+    slug: "power-washing",
+    title: "Power Washing",
+    category: "exterior",
+    summary:
+      "Required prep on every exterior job. Removes dirt, mildew, chalking, and failing paint so the new coat actually bonds.",
+    body: "Power washing is the first step on every exterior repaint we do. We remove dirt, mildew, chalking, and any old paint that's already failing, so the new coat bonds to a clean surface. We also offer standalone power-washing for buildings that aren't ready for paint but need their siding and walkways cleaned.",
+  },
+  {
+    slug: "stucco-repair",
+    title: "Stucco & EIFS Repair",
+    category: "exterior",
+    summary:
+      "Patch cracks, address EIFS, then paint. Common in the Bay; we don't subcontract this out and we don't paint over a substrate that's about to fail.",
+    body: "Stucco and EIFS (synthetic stucco) are everywhere in Bay Area buildings, and both fail in predictable ways. We patch cracks, address spalling, and repair EIFS using the right material for the substrate, then prime and paint. We don't paint over stucco that's actively failing — we fix it first or tell you what's needed before paint goes on.",
+  },
+  {
+    slug: "siding-restoration",
+    title: "Vinyl & Aluminum Siding",
+    category: "exterior",
+    summary:
+      "Vinyl, aluminum, and Hardie siding. The right primer for each substrate so the paint doesn't chip off a year later.",
+    body: "Painting vinyl and aluminum siding is its own skill — wrong primer and the paint peels in a season. Our crews use bonding primers and exterior acrylics rated for the substrate, with the right surface prep so the finish actually lasts. The same applies to Hardie and other cementitious siding.",
+  },
+  {
+    slug: "deck-staining",
+    title: "Deck & Fence Staining",
+    category: "exterior",
+    summary:
+      "Strip, sand, stain. Restoring weathered redwood and cedar without replacing the boards.",
+    body: "Decks and fences in Marin and the Bay weather fast. We strip old finish, sand back to clean wood, and apply transparent, semi-transparent, or solid stain depending on how the boards look and how often you want to refinish. Deck rebuilds and board replacement are handled by partners we trust if the structure isn't worth saving.",
+  },
+  {
+    slug: "epa-lead-safe",
+    title: "EPA Lead-Safe Practices",
+    category: "exterior",
+    summary:
+      "Older Bay Area buildings often have lead paint. Our crews follow EPA RRP lead-safe work practices on any job that disturbs it.",
+    body: "Bay Area housing stock is old. Pre-1978 buildings commonly have lead-based paint, and disturbing it without lead-safe practices is a legal and health risk. Our crews follow EPA RRP lead-safe work practices: containment, controlled removal, HEPA cleanup, and clearance. We provide documentation suitable for owner files and disclosures.",
+  },
+
+  // ── Interior ────────────────────────────────────────────────────────
+  {
+    slug: "interior-painting",
+    title: "Interior Painting",
+    category: "interior",
+    summary:
+      "Walls, ceilings, doors, and trim. Patch, prime, two coats of mid-grade professional paint. Cut by hand.",
+    body: "Interior painting is the workhorse service: unit turnovers, multi-family common areas (lobbies, halls, stairwells, amenity rooms), and commercial interiors. We patch and prime, then apply two coats of mid-grade professional paint (Benjamin Moore Regal or Sherwin Williams SuperPaint). Walls cut and rolled, ceilings sprayed where appropriate, trim painted by hand.",
+  },
+  {
+    slug: "cabinet-repainting",
+    title: "Cabinet Repainting",
+    category: "interior",
+    summary:
+      "Kitchen and bath cabinets refinished between tenancies. Sanded, primed, and sprayed for a smooth, durable finish.",
+    body: "Cabinets are some of the most touched surfaces in a unit, and replacing them between tenancies isn't always worth it. We refinish kitchen and bath cabinets: degrease, sand, prime with a bonding primer, and spray a durable finish coat in a controlled space. The result holds up to daily use without looking like a cheap repaint.",
+  },
+  {
+    slug: "drywall-repair",
+    title: "Drywall Repair",
+    category: "interior",
+    summary:
+      "Holes, water damage, settling cracks: patched, taped, textured to match before paint goes on.",
+    body: "Standard part of any unit turnover. We patch holes from screws and anchors, address water damage and bubbled tape, repair settling cracks, and re-texture the patch to match the surrounding wall before paint. We can also handle larger repairs — medium-to-large holes that need a backing board, sections of failed drywall, and water-damaged areas after the moisture source is fixed.",
+  },
+  {
+    slug: "light-carpentry",
+    title: "Light Carpentry",
+    category: "interior",
+    summary:
+      "Trim replacement, door and door-frame repair, wood rot, banister fixes. Handled in-house so paint-adjacent work doesn't get punted.",
+    body: "Paint and trim work go together. Our crews handle the light carpentry that turns up on every painting job: damaged baseboards and casing, broken door frames, banister and stair spindle repair, kitchen cabinet door fixes, and small areas of wood rot. Anything beyond what a paint crew should handle, we tell you up front.",
+  },
+  {
+    slug: "wallpaper-removal",
+    title: "Wallpaper Removal",
+    category: "interior",
+    summary:
+      "Steam, strip, skim coat, paint. We take dated units to rent-ready without a full renovation.",
+    body: "Wallpaper removal is one of the more painful prep jobs in the trade — done badly, it leaves a wall that no paint can hide. We score, steam, strip, and skim coat the wall before any paint goes on. Older Bay Area units often have layers; we plan for that in the scope.",
+  },
+  {
+    slug: "concrete-epoxy",
+    title: "Concrete & Epoxy",
+    category: "interior",
+    summary:
+      "Stained concrete and epoxy floor coatings for garages, basements, light commercial, and amenity rooms.",
+    body: "Concrete staining adds dimension to garage floors, basements, and exposed slab in amenity rooms. Epoxy coatings make the same surfaces dramatically more durable and easier to clean. Our crews surface-prep, etch where required, and apply stains or epoxy systems suited to the use — vehicle traffic, foot traffic, or wet areas.",
+  },
+];
+
+export function servicesByCategory(cat: ServiceCategory): Service[] {
+  return SERVICES.filter((s) => s.category === cat);
+}
 
 // The 5-step paint workflow we run on every job. Inspired by CertaPro's
 // process card, written in our voice. Shown on services pages + About.
@@ -188,13 +240,12 @@ export const VENDOR_PACKET = [
   "Standard scope template (turnovers and exteriors)",
 ];
 
-// How a portfolio engagement runs, from first contact to invoice. Lives on the
-// About page now that there's no standalone PM route.
+// How a portfolio engagement runs, from first contact to invoice.
 export const PM_ENGAGEMENT = [
   {
     n: "01",
     title: "Send the portfolio",
-    body: "Use the estimator or email a unit list. We respond within 48 hours.",
+    body: "Email a unit list or building details and we respond within 48 hours.",
   },
   {
     n: "02",
@@ -221,8 +272,7 @@ export const COMMITMENTS = [
   "Photo documentation on completion, attached to the invoice for your records.",
 ];
 
-// Bay Area counties served. Drives the per-county SEO landing pages on the
-// rental site; replicate here as the service area grows.
+// Bay Area counties served (alphabetical). Drives the per-county SEO landing pages.
 export const LOCATIONS = [
   "Alameda",
   "Contra Costa",
@@ -274,7 +324,7 @@ export const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "How quickly can you quote and start a unit turnover?",
-    a: "Quotes go out within 48 hours of a walk-through or completed estimator submission. Turnover crews can typically start within one to two weeks; emergency turnovers are possible when a unit needs to be re-listed quickly.",
+    a: "Quotes go out within 48 hours of a walk-through or a complete email request. Turnover crews can typically start within one to two weeks; emergency turnovers are possible when a unit needs to be re-listed quickly.",
   },
   {
     q: "Do you work on occupied buildings?",
@@ -289,26 +339,3 @@ export const FAQS: { q: string; a: string }[] = [
     a: "Yes. Most of our work is billed against a PO with net-30 terms. Smaller jobs can be paid by card on completion if a PM prefers.",
   },
 ];
-
-// Estimator config. Single source of truth so Leslie can tune the numbers from
-// here without a code change. Rates are Bay Area averages pending real data.
-export const ESTIMATOR = {
-  // $ per sqft of floor area, two coats, basic prep included. One rate per
-  // surface — no paint-tier upsell.
-  rates: {
-    interior: 5.0,
-    exterior: 6.5,
-  },
-  // Volume discounts applied to the portfolio total. PMs running 25+ unit
-  // turnovers should see a real benefit for batching the work.
-  volumeDiscounts: [
-    { minUnits: 25, percent: 12, label: "25+ units" },
-    { minUnits: 10, percent: 8, label: "10–24 units" },
-    { minUnits: 5, percent: 5, label: "5–9 units" },
-  ],
-  // Range communicated as ± this fraction. Walk-through required for a binding
-  // quote; this is a planning number.
-  uncertaintyPct: 0.15,
-};
-
-export type Surface = "interior" | "exterior";

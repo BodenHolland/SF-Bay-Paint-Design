@@ -37,13 +37,13 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-3">
           <TiltLink
-            href="/estimate"
+            href="/contact"
             max={6}
             scale={1.04}
             sheen={false}
             className="hidden border border-gold/50 px-5 py-2 text-xs uppercase tracking-[0.18em] text-gold transition-colors hover:border-gold-bright hover:text-gold-bright lg:inline-block"
           >
-            Get an estimate
+            Get a quote
           </TiltLink>
           <button
             type="button"

@@ -32,10 +32,10 @@ export default function NotFound() {
               Back home
             </TiltLink>
             <Link
-              href="/estimate"
+              href="/contact"
               className="group inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-foreground/85 transition-colors hover:text-gold-bright"
             >
-              <span className="swipe-underline">Get an estimate</span>
+              <span className="swipe-underline">Contact us</span>
               <span
                 aria-hidden
                 className="transition-transform duration-300 group-hover:translate-x-1"

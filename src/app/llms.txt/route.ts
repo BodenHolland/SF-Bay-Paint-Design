@@ -10,14 +10,13 @@ export function GET() {
 
 > Painting and turnovers for Bay Area property portfolios. Interior and exterior work for property managers, landlords, and building owners across ${LOCATIONS_CLAUSE}.
 
-SF Bay Paint & Design is the painting arm of operator Leslie Burnley, who also runs SF Bay Rental Co. The crew handles rental unit turnovers, multi-family interiors, commercial interiors, and exterior repaints (low and mid-rise, single-family). Quotes go through a portfolio-scale estimator built for property managers running 5 to 25+ units at a time.
+SF Bay Paint & Design is the painting arm of operator Leslie Burnley, who also runs SF Bay Rental Co. The crew handles rental unit turnovers, multi-family interiors, commercial interiors, and exterior repaints (low and mid-rise, single-family). Quote requests are handled via the contact page; we respond within 48 hours.
 
 ## Key pages
 
 - [Home](${base}/): Overview of services, the estimator, and the property-manager track.
-- [Services](${base}/services): Interior and exterior painting at portfolio scale.
+- [Services](${base}/services): Full catalog of painting trades — interior and exterior, grouped by category.
 ${SERVICES.map((s) => `- [${s.title}](${base}/services/${s.slug}): ${s.summary}`).join("\n")}
-- [Estimator](${base}/estimate): Paste a list of unit addresses and sqft, get a portfolio quote with a volume discount built in.
 - [Locations](${base}/locations): Counties served across the SF Bay Area.
 - [About](${base}/about): Operator background, vendor packet, response SLA, and how a portfolio engagement runs. Includes a property-manager section anchored at #property-managers.
 - [Contact](${base}/contact): Reach out about a job or onboard us as a vendor.

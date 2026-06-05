@@ -272,10 +272,10 @@ export default async function About() {
             </h2>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-5">
               <Link
-                href="/estimate"
+                href="/contact"
                 className="inline-flex items-center gap-3 bg-gold px-8 py-3.5 text-sm uppercase tracking-[0.18em] text-background transition-colors hover:bg-gold-bright"
               >
-                Run a portfolio estimate
+                Contact us for a quote
               </Link>
               <Link
                 href="/contact"

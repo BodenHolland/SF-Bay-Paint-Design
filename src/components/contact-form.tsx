@@ -5,12 +5,15 @@ import { submitContact } from "@/app/contact/actions";
 import { TiltButton } from "@/components/tilt-button";
 
 const INTENTS = [
-  "Unit turnover (single)",
-  "Unit turnovers (portfolio)",
-  "Commercial interior",
-  "Exterior repaint",
+  "Interior painting",
+  "Exterior painting",
+  "Unit turnover (portfolio)",
+  "Commercial painting",
+  "Stucco / siding repair",
+  "Cabinet repainting",
+  "Drywall / carpentry",
+  "Power washing only",
   "Become a vendor",
-  "Single-family exterior",
   "Other",
 ];
 
