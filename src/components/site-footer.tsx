@@ -5,7 +5,7 @@ import { getSiteContent } from "@/lib/content";
 import { CurrentYear } from "@/components/current-year";
 
 export async function SiteFooter() {
-  const { contact, socials, locationsClause } = await getSiteContent();
+  const { contact } = await getSiteContent();
   return (
     <footer id="contact" className="border-t border-line bg-charcoal/40">
       <div className="mx-auto w-full max-w-6xl px-6 py-16">
@@ -59,23 +59,6 @@ export async function SiteFooter() {
                 </a>
               </li>
             </ul>
-            <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
-              {socials.map((s) => (
-                <li key={s.label}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs font-medium uppercase tracking-wider text-muted transition-colors hover:text-gold"
-                  >
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 text-xs leading-relaxed text-muted">
-              Serving {locationsClause}.
-            </p>
           </div>
         </div>
 
