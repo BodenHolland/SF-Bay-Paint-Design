@@ -42,7 +42,7 @@ export default async function About() {
         </section>
 
         <section className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
-          <div className="text-lg leading-relaxed text-foreground/80 md:columns-2 md:gap-14 [&>p]:mb-5 [&>p]:break-inside-avoid [&>p:last-child]:mb-0">
+          <div className="space-y-5 text-lg leading-relaxed text-foreground/80">
             {leslie.bio.map((para, i) => (
               <p key={i}>{para}</p>
             ))}
