@@ -9,6 +9,11 @@ import { useEffect } from "react";
 // instant while anchor-link navigation still glides.
 export function SmoothScroll() {
   useEffect(() => {
+    // On a hard reload, force the page to start at the top before the
+    // body fade-in plays, so the hero is never partway scrolled.
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = window.setTimeout(() => {
       document.documentElement.dataset.smooth = "true";

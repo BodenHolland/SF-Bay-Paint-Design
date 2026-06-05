@@ -226,9 +226,9 @@ function Work() {
 /* ── Trust band ───────────────────────────────────────────────────── */
 function Trust() {
   const stats = [
-    { v: TRUST.cslb, l: "California contractors license" },
-    { v: TRUST.insurance, l: "General liability coverage" },
-    { v: TRUST.yearsOperating, l: "Bay Area operator" },
+    { v: "Licensed & Insured", l: "California painting contractor" },
+    { v: "Free Estimates", l: "Quotes within 48 hours" },
+    { v: "Bay Area Owned", l: "Marin-based, serving the SF Bay Area" },
   ];
   return (
     <section className="border-y border-line">
