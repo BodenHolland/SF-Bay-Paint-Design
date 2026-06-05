@@ -112,7 +112,7 @@ export function ContactForm() {
           <div>
             <label
               htmlFor="contact-intent"
-              className="mb-2 block text-xs uppercase tracking-[0.18em] text-gold"
+              className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-gold"
             >
               Job type
             </label>
@@ -135,7 +135,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="contact-message"
-            className="mb-2 block text-xs uppercase tracking-[0.18em] text-gold"
+            className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-gold"
           >
             Message
           </label>
@@ -150,7 +150,7 @@ export function ContactForm() {
               el.style.height = "auto";
               el.style.height = el.scrollHeight + "px";
             }}
-            className="w-full resize-none overflow-hidden border border-line/70 bg-background px-3 py-3 text-foreground placeholder:text-muted/60 outline-none transition-colors focus:border-gold/60"
+            className="w-full resize-none overflow-hidden border border-line/70 bg-background px-3 py-3 text-foreground placeholder:text-muted/50 outline-none transition-colors focus:border-gold/60"
           />
         </div>
 
@@ -234,7 +234,7 @@ function Field({
     <div>
       <label
         htmlFor={id}
-        className="mb-2 block text-xs uppercase tracking-[0.18em] text-gold"
+        className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-gold"
       >
         {label}
         {optional && (

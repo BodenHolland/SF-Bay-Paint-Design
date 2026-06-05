@@ -103,7 +103,7 @@ function Hero() {
             property managers actually work.
           </p>
           <div
-            className="rise mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-4 sm:justify-start"
+            className="rise mt-9 flex flex-wrap items-center justify-start gap-x-5 gap-y-4"
             style={{ animationDelay: "0.3s" }}
           >
             <Link
@@ -135,7 +135,7 @@ function Services() {
     <section id="services" className="bg-charcoal/40">
       <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          <h2 className="text-3xl font-light tracking-tight text-foreground md:text-5xl lg:text-6xl">
             Our services include
           </h2>
         </div>
@@ -144,7 +144,7 @@ function Services() {
           const items = servicesByCategory(cat.key);
           return (
             <div key={cat.key} className="mt-16">
-              <h3 className="text-2xl font-bold tracking-tight md:text-3xl">
+              <h3 className="text-2xl font-light tracking-tight md:text-3xl">
                 {cat.title} painting
               </h3>
               <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -203,7 +203,7 @@ function Work() {
   return (
     <section className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
       <div className="text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+        <h2 className="text-3xl font-light tracking-tight text-foreground md:text-5xl lg:text-6xl">
           Our work
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm text-muted">
@@ -227,7 +227,7 @@ function Trust() {
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 divide-y divide-line px-6 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         {stats.map((s) => (
           <div key={s.l} className="px-4 py-10 text-center sm:py-14">
-            <div className="text-2xl font-bold tabular-nums text-foreground md:text-3xl">
+            <div className="text-2xl font-bold text-foreground md:text-3xl">
               {s.v}
             </div>
             <p className="mx-auto mt-3 max-w-[16rem] text-sm text-muted">
@@ -255,7 +255,7 @@ function ForPm() {
           />
         </div>
         <div>
-          <h2 className="text-3xl font-bold leading-tight tracking-tight md:text-5xl">
+          <h2 className="text-3xl font-light leading-tight tracking-tight md:text-5xl">
             Built by an operator who turns her own portfolio.
           </h2>
           <p className="mt-6 text-base leading-relaxed text-foreground/75 md:text-lg">
@@ -263,7 +263,7 @@ function ForPm() {
             are written so your accounting can drop them in. Timelines match a
             lease cycle. Crews respect an occupied building.
           </p>
-          <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
+          <ul className="mt-8 grid grid-cols-1 gap-x-6 gap-y-4 text-sm sm:grid-cols-3">
             <li>
               <p className="font-bold uppercase tracking-wider text-gold">Response SLA</p>
               <p className="mt-1 text-foreground/85">{TRUST.responseSla}</p>
@@ -296,7 +296,7 @@ function Locations() {
       <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
         <div className="text-center">
           <p className="eyebrow">Where we work</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+          <h2 className="mt-4 text-3xl font-light tracking-tight text-foreground md:text-5xl lg:text-6xl">
             Across the SF Bay Area.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted">
@@ -317,7 +317,7 @@ function Testimonials() {
   return (
     <section className="bg-charcoal/40">
       <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
-        <h2 className="text-center text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+        <h2 className="text-center text-3xl font-light tracking-tight text-foreground md:text-5xl lg:text-6xl">
           Satisfied customers
         </h2>
         <div className="mt-14 grid grid-cols-1 gap-12 md:grid-cols-3">
@@ -342,7 +342,7 @@ function Testimonials() {
 function Faq() {
   return (
     <section className="mx-auto w-full max-w-3xl px-6 py-20 md:py-28">
-      <h2 className="text-center text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+      <h2 className="text-center text-3xl font-light tracking-tight text-foreground md:text-5xl lg:text-6xl">
         Frequently asked
       </h2>
       <div className="mt-12">
@@ -361,11 +361,11 @@ function Faq() {
 function CtaBand() {
   return (
     <section className="bg-foreground">
-      <div className="mx-auto w-full max-w-6xl px-6 py-20 text-center md:py-24">
-        <h2 className="mx-auto max-w-2xl text-balance text-3xl font-bold leading-tight tracking-tight text-background md:text-5xl">
+      <div className="mx-auto w-full max-w-6xl px-6 py-20 text-center md:py-28">
+        <h2 className="mx-auto max-w-2xl text-balance text-3xl font-light leading-tight tracking-tight text-background md:text-5xl">
           Have a property to repaint?
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-base text-background/75">
+        <p className="mx-auto mt-6 max-w-xl text-base text-background/75">
           Quotes go out within 48 hours of a walk-through or a complete email
           request.
         </p>

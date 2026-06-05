@@ -56,7 +56,7 @@ export default async function ServiceDetail({
         <section className="border-b border-line/60">
           <div className="mx-auto w-full max-w-6xl px-6 pb-12 pt-20">
             <h1
-              className="rise mt-5 max-w-5xl text-5xl font-light leading-[1.04] tracking-tight md:text-7xl lg:text-8xl"
+              className="rise max-w-5xl text-5xl font-light leading-[1.04] tracking-tight md:text-7xl lg:text-8xl"
               style={{ animationDelay: "0.1s" }}
             >
               {service.title}
@@ -68,12 +68,12 @@ export default async function ServiceDetail({
               {service.summary}
             </p>
             <div
-              className="rise mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-7 sm:justify-start"
+              className="rise mt-9 flex flex-wrap items-center justify-start gap-x-5 gap-y-4"
               style={{ animationDelay: "0.3s" }}
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
+                className="inline-flex items-center bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
               >
                 Contact us for a quote
               </Link>
@@ -107,7 +107,7 @@ export default async function ServiceDetail({
         )}
 
         {/* Detail body */}
-        <section className="mx-auto w-full max-w-6xl px-6 py-16">
+        <section className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
           <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr]">
             <Reveal>
               <div>
@@ -153,7 +153,7 @@ export default async function ServiceDetail({
 
         {/* 5-step process */}
         <section className="border-t border-line/60 bg-charcoal/30">
-          <div className="mx-auto w-full max-w-6xl px-6 py-16">
+          <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
             <Reveal>
               <p className="eyebrow">How every job runs</p>
               <h2 className="mt-4 text-3xl font-light tracking-tight md:text-4xl">
@@ -182,7 +182,7 @@ export default async function ServiceDetail({
 
         {/* Closing CTA */}
         <section className="border-t border-line/60 bg-charcoal/30">
-          <div className="mx-auto w-full max-w-6xl px-6 py-16 text-center">
+          <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28 text-center">
             <h2 className="mx-auto max-w-2xl text-balance text-3xl font-light leading-tight tracking-tight md:text-5xl">
               Ready for a number?
             </h2>
@@ -193,7 +193,7 @@ export default async function ServiceDetail({
             <div className="mt-9 flex flex-wrap items-center justify-center gap-5">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
+                className="inline-flex items-center bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
               >
                 Contact us for a quote
               </Link>

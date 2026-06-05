@@ -51,10 +51,10 @@ export default function ServicesPage() {
             key={cat.key}
             className={ci > 0 ? "border-t border-line/60" : ""}
           >
-            <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-24">
+            <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
               <Reveal>
                 <div className="text-center">
-                  <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+                  <h2 className="text-3xl font-light tracking-tight text-foreground md:text-4xl">
                     {cat.title} painting
                   </h2>
                 </div>
@@ -83,7 +83,7 @@ export default function ServicesPage() {
                           />
                         )}
                       </div>
-                      <h3 className="mt-7 text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-gold md:text-2xl">
+                      <h3 className="mt-7 text-xl font-light tracking-tight text-foreground transition-colors group-hover:text-gold md:text-2xl">
                         {s.title}
                       </h3>
                       <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-muted">
@@ -107,8 +107,8 @@ export default function ServicesPage() {
         ))}
 
         {/* Closing CTA */}
-        <section className="border-t border-line/60">
-          <div className="mx-auto w-full max-w-6xl px-6 py-20 text-center">
+        <section className="border-t border-line/60 bg-charcoal/30">
+          <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28 text-center">
             <h2 className="mx-auto max-w-2xl text-balance text-3xl font-light leading-tight tracking-tight md:text-5xl">
               Have a job? Send us the details.
             </h2>
@@ -119,7 +119,7 @@ export default function ServicesPage() {
             <div className="mt-9 flex flex-wrap items-center justify-center gap-5">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
+                className="inline-flex items-center bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
               >
                 Contact us for a quote
               </Link>

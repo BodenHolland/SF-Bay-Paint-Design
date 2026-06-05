@@ -31,15 +31,18 @@ export default async function About() {
       <SiteHeader />
       <main id="main-content" tabIndex={-1} className="flex-1">
         <section className="border-b border-line/60">
-          <div className="mx-auto w-full max-w-6xl px-6 pb-16 pt-20">
-            <h1 className="max-w-5xl text-5xl font-light leading-[1.04] tracking-tight md:text-7xl lg:text-8xl">
+          <div className="mx-auto w-full max-w-6xl px-6 pb-12 pt-20">
+            <h1
+              className="rise max-w-5xl text-5xl font-light leading-[1.04] tracking-tight md:text-7xl lg:text-8xl"
+              style={{ animationDelay: "0.1s" }}
+            >
               Built by an operator who turns her own portfolio.
             </h1>
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-3xl px-6 py-20">
-          <div className="space-y-5 text-lg leading-relaxed text-foreground/80">
+        <section className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
+          <div className="max-w-3xl space-y-5 text-lg leading-relaxed text-foreground/80">
             {leslie.bio.map((para, i) => (
               <p key={i}>{para}</p>
             ))}
@@ -50,7 +53,7 @@ export default async function About() {
             Content moved here from the (deleted) /for-property-managers
             route. The About page is now the home for PM-facing context. */}
         <section id="property-managers" className="border-t border-line/60 bg-charcoal/30">
-          <div className="mx-auto w-full max-w-6xl px-6 py-20">
+          <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
             <div className="max-w-3xl">
               <p className="eyebrow">For property managers</p>
               <h2 className="mt-4 text-balance text-3xl font-light tracking-tight md:text-5xl lg:text-6xl">
@@ -89,7 +92,7 @@ export default async function About() {
 
         {/* ── How a portfolio engagement runs ──────────────────────────── */}
         <section className="border-t border-line/60 bg-charcoal/30">
-          <div className="mx-auto w-full max-w-6xl px-6 py-20">
+          <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
             <p className="eyebrow">How a portfolio engagement runs</p>
             <h2 className="mt-4 text-3xl font-light tracking-tight md:text-5xl lg:text-6xl">
               Quote to invoice in four steps.
@@ -116,7 +119,7 @@ export default async function About() {
 
         {/* ── Service commitments ──────────────────────────────────────── */}
         <section className="border-t border-line/60">
-          <div className="mx-auto w-full max-w-6xl px-6 py-20">
+          <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
             <div className="max-w-2xl">
               <p className="eyebrow">What we commit to</p>
               <h2 className="mt-4 text-3xl font-light tracking-tight md:text-4xl">
@@ -140,14 +143,14 @@ export default async function About() {
 
         {/* ── CTA ──────────────────────────────────────────────────────── */}
         <section className="border-t border-line/60 bg-charcoal/30">
-          <div className="mx-auto w-full max-w-6xl px-6 py-20 text-center">
+          <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28 text-center">
             <h2 className="mx-auto max-w-2xl text-balance text-3xl font-light leading-tight tracking-tight md:text-5xl">
               Start with an estimate.
             </h2>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-5">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
+                className="inline-flex items-center bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
               >
                 Contact us for a quote
               </Link>
