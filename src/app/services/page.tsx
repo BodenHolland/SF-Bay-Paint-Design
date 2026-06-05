@@ -33,14 +33,15 @@ export default function ServicesPage() {
               className="rise mt-5 max-w-3xl text-4xl font-light leading-[1.08] tracking-tight md:text-6xl"
               style={{ animationDelay: "0.1s" }}
             >
-              The painting trades, done at portfolio scale.
+              Our services.
             </h1>
             <p
               className="rise mt-5 max-w-2xl text-base leading-relaxed text-muted"
               style={{ animationDelay: "0.2s" }}
             >
-              We don&rsquo;t consult on color or design. We paint, on schedule,
-              for the property managers and landlords running real portfolios.
+              Interior and exterior painting across the San Francisco Bay
+              Area, from single-unit turnovers to whole-building exteriors.
+              Quotes within 48 hours.
             </p>
           </div>
         </section>
