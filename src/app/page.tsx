@@ -103,7 +103,7 @@ function Hero() {
             property managers actually work.
           </p>
           <div
-            className="rise mt-9 flex flex-wrap items-center gap-x-5 gap-y-4"
+            className="rise mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-4 sm:justify-start"
             style={{ animationDelay: "0.3s" }}
           >
             <Link
@@ -276,10 +276,6 @@ function ForPm() {
               <p className="font-bold uppercase tracking-wider text-gold">Billing</p>
               <p className="mt-1 text-foreground/85">PO-friendly, net-30</p>
             </li>
-            <li>
-              <p className="font-bold uppercase tracking-wider text-gold">Vendor packet</p>
-              <p className="mt-1 text-foreground/85">W-9, COI, license, references</p>
-            </li>
           </ul>
           <Link
             href="/about#property-managers"
@@ -324,10 +320,6 @@ function Testimonials() {
         <h2 className="text-center text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
           Satisfied customers
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-center text-sm text-muted">
-          Placeholder quotes. We&rsquo;ll swap these for real, named references
-          once we have permission from PMs and landlords to publish their feedback.
-        </p>
         <div className="mt-14 grid grid-cols-1 gap-12 md:grid-cols-3">
           {TESTIMONIALS.map((t) => (
             <figure key={t.author} className="text-center">

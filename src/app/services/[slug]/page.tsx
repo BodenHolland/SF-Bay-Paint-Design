@@ -68,7 +68,7 @@ export default async function ServiceDetail({
               {service.summary}
             </p>
             <div
-              className="rise mt-9 flex flex-wrap items-center gap-x-5 gap-y-7"
+              className="rise mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-7 sm:justify-start"
               style={{ animationDelay: "0.3s" }}
             >
               <Link

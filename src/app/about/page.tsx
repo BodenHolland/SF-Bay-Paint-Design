@@ -7,13 +7,7 @@ import { getSiteContent } from "@/lib/content";
 import { JsonLd } from "@/components/json-ld";
 import { getSiteUrl } from "@/lib/site-url";
 import { businessLd, breadcrumbLd } from "@/lib/structured-data";
-import {
-  LEGAL,
-  TRUST,
-  VENDOR_PACKET,
-  PM_ENGAGEMENT,
-  COMMITMENTS,
-} from "@/lib/site";
+import { TRUST, PM_ENGAGEMENT, COMMITMENTS } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -44,75 +38,11 @@ export default async function About() {
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-6xl px-6 py-20">
-          <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="border border-line/60 bg-charcoal/30 p-10">
-              <p className="eyebrow">{leslie.role}</p>
-              <h2 className="mt-3 text-3xl font-light tracking-tight md:text-4xl">
-                {leslie.name}
-              </h2>
-              <p className="mt-2 text-sm uppercase tracking-[0.18em] text-muted">
-                Operating since {leslie.since}
-              </p>
-              <dl className="mt-8 grid grid-cols-2 gap-y-6 text-sm">
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.18em] text-muted">Sister business</dt>
-                  <dd className="mt-2 text-foreground/80">SF Bay Rental Co.</dd>
-                </div>
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.18em] text-muted">Sister business</dt>
-                  <dd className="mt-2 text-foreground/80">SF Bay Relocate</dd>
-                </div>
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.18em] text-muted">Brokerage</dt>
-                  <dd className="mt-2 text-foreground/80">Holmes Burrell, San Rafael</dd>
-                </div>
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.18em] text-muted">License</dt>
-                  <dd className="mt-2 text-foreground/80">DRE #01923170</dd>
-                </div>
-              </dl>
-
-              {/* LLC registration. Pulled from the CA Secretary of State filing. */}
-              <div className="mt-10 border-t border-line/60 pt-6">
-                <p className="eyebrow">Entity</p>
-                <p className="mt-3 text-sm font-normal tracking-tight text-foreground/85">
-                  {LEGAL.entity}
-                </p>
-                <dl className="mt-5 grid grid-cols-2 gap-y-4 text-xs">
-                  <div>
-                    <dt className="uppercase tracking-[0.18em] text-muted">Jurisdiction</dt>
-                    <dd className="mt-1 text-foreground/75">{LEGAL.jurisdiction}</dd>
-                  </div>
-                  <div>
-                    <dt className="uppercase tracking-[0.18em] text-muted">SOS file</dt>
-                    <dd className="mt-1 text-foreground/75 tabular-nums">{LEGAL.fileNumber}</dd>
-                  </div>
-                  <div>
-                    <dt className="uppercase tracking-[0.18em] text-muted">Filed</dt>
-                    <dd className="mt-1 text-foreground/75">
-                      {new Date(LEGAL.filedOn).toLocaleDateString("en-US", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="uppercase tracking-[0.18em] text-muted">Registered agent</dt>
-                    <dd className="mt-1 text-foreground/75">{LEGAL.registeredAgent}</dd>
-                  </div>
-                </dl>
-              </div>
-            </div>
-
-            <div>
-              <div className="space-y-5 text-lg leading-relaxed text-foreground/80">
-                {leslie.bio.map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
-              </div>
-            </div>
+        <section className="mx-auto w-full max-w-3xl px-6 py-20">
+          <div className="space-y-5 text-lg leading-relaxed text-foreground/80">
+            {leslie.bio.map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
           </div>
         </section>
 
@@ -153,46 +83,6 @@ export default async function About() {
                   {TRUST.unitsPainted}
                 </p>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── Vendor packet ──────────────────────────────────────────── */}
-        <section className="border-t border-line/60">
-          <div className="mx-auto w-full max-w-6xl px-6 py-20">
-            <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr]">
-              <div>
-                <p className="eyebrow">Vendor packet</p>
-                <h2 className="mt-4 text-3xl font-light tracking-tight md:text-5xl lg:text-6xl">
-                  Everything you need to add us as a vendor.
-                </h2>
-                <p className="mt-5 text-base leading-relaxed text-muted">
-                  One PDF, sent on request. No back-and-forth to dig up
-                  documents.
-                </p>
-                <Link
-                  href="/contact"
-                  className="group mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-gold transition-colors hover:text-gold-bright"
-                >
-                  <span className="swipe-underline">Request the packet</span>
-                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                </Link>
-              </div>
-              <ul className="border border-line/60">
-                {VENDOR_PACKET.map((item, i) => (
-                  <li
-                    key={item}
-                    className={`flex items-center gap-4 px-6 py-5 ${
-                      i === VENDOR_PACKET.length - 1 ? "" : "border-b border-line/60"
-                    }`}
-                  >
-                    <span className="text-[0.65rem] uppercase tracking-[0.18em] text-gold tabular-nums">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-sm text-foreground/85">{item}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </section>
@@ -252,7 +142,7 @@ export default async function About() {
         <section className="border-t border-line/60 bg-charcoal/30">
           <div className="mx-auto w-full max-w-6xl px-6 py-20 text-center">
             <h2 className="mx-auto max-w-2xl text-balance text-3xl font-light leading-tight tracking-tight md:text-5xl">
-              Start with an estimate or onboard us as a vendor.
+              Start with an estimate.
             </h2>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-5">
               <Link
@@ -260,13 +150,6 @@ export default async function About() {
                 className="inline-flex items-center gap-3 bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
               >
                 Contact us for a quote
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.18em] text-foreground/85 transition-colors hover:text-gold-bright"
-              >
-                <span className="swipe-underline">Request vendor packet</span>
-                <span aria-hidden>→</span>
               </Link>
             </div>
           </div>

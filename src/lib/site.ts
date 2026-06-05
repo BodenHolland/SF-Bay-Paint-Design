@@ -324,7 +324,7 @@ export const TESTIMONIALS: Testimonial[] = [
 export const FAQS: { q: string; a: string }[] = [
   {
     q: "Do you carry the licensing and insurance our approved-vendor list requires?",
-    a: "Yes. We carry a California contractors license and general liability coverage suitable for multi-family and commercial work, and can provide a certificate of insurance on request. Specific limits and the W-9 are bundled in our vendor packet.",
+    a: "Yes. We carry a California contractors license and general liability coverage suitable for multi-family and commercial work, and can provide a certificate of insurance and W-9 on request.",
   },
   {
     q: "How quickly can you quote and start a unit turnover?",
@@ -333,10 +333,6 @@ export const FAQS: { q: string; a: string }[] = [
   {
     q: "Do you work on occupied buildings?",
     a: "Yes. Common areas, hallways, lobbies, and exteriors of occupied multi-family and commercial buildings are most of what we do. Tenants get notice, work is sequenced to keep entries clear, and noisy work is held to standard daytime hours.",
-  },
-  {
-    q: "What paint do you use?",
-    a: "Mid-grade professional paint by default (Benjamin Moore Regal or Sherwin Williams SuperPaint), which holds up in rental units, multi-family common areas, and commercial settings. If a job calls for a different product, we'll spec it during the walk-through.",
   },
   {
     q: "Do you accept POs and invoice net-30?",
