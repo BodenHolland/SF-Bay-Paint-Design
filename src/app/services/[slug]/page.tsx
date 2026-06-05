@@ -62,7 +62,7 @@ export default async function ServiceDetail({
               {service.title}
             </h1>
             <p
-              className="rise mt-5 max-w-2xl text-base leading-relaxed text-muted"
+              className="rise mt-5 max-w-3xl text-base leading-relaxed text-muted"
               style={{ animationDelay: "0.2s" }}
             >
               {service.summary}
