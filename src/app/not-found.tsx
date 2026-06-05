@@ -27,7 +27,7 @@ export default function NotFound() {
               href="/"
               max={5}
               scale={1.02}
-              className="inline-flex items-center gap-3 bg-gold px-8 py-3.5 text-sm uppercase tracking-[0.18em] text-background hover:bg-gold-bright"
+              className="inline-flex items-center gap-3 bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
             >
               Back home
             </TiltLink>

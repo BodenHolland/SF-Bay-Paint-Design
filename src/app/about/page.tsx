@@ -38,8 +38,7 @@ export default async function About() {
       <main id="main-content" tabIndex={-1} className="flex-1">
         <section className="border-b border-line/60">
           <div className="mx-auto w-full max-w-6xl px-6 pb-16 pt-20">
-            <p className="eyebrow">About</p>
-            <h1 className="mt-5 max-w-3xl text-4xl font-light leading-[1.08] tracking-tight md:text-6xl">
+            <h1 className="max-w-5xl text-5xl font-light leading-[1.04] tracking-tight md:text-7xl lg:text-8xl">
               Built by an operator who turns her own portfolio.
             </h1>
           </div>
@@ -113,21 +112,6 @@ export default async function About() {
                   <p key={i}>{para}</p>
                 ))}
               </div>
-
-              <ul className="mt-8 flex items-center gap-5">
-                {socials.map((s) => (
-                  <li key={s.label}>
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex text-sm uppercase tracking-[0.18em] text-muted transition-colors hover:text-gold-bright"
-                    >
-                      <span className="swipe-underline">{s.label}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </section>
@@ -139,7 +123,7 @@ export default async function About() {
           <div className="mx-auto w-full max-w-6xl px-6 py-20">
             <div className="max-w-3xl">
               <p className="eyebrow">For property managers</p>
-              <h2 className="mt-4 text-balance text-3xl font-light tracking-tight md:text-5xl">
+              <h2 className="mt-4 text-balance text-3xl font-light tracking-tight md:text-5xl lg:text-6xl">
                 A painter who has been on your side of the table.
               </h2>
               <p className="mt-6 text-base leading-relaxed text-foreground/80">
@@ -179,7 +163,7 @@ export default async function About() {
             <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr]">
               <div>
                 <p className="eyebrow">Vendor packet</p>
-                <h2 className="mt-4 text-3xl font-light tracking-tight md:text-5xl">
+                <h2 className="mt-4 text-3xl font-light tracking-tight md:text-5xl lg:text-6xl">
                   Everything you need to add us as a vendor.
                 </h2>
                 <p className="mt-5 text-base leading-relaxed text-muted">
@@ -217,7 +201,7 @@ export default async function About() {
         <section className="border-t border-line/60 bg-charcoal/30">
           <div className="mx-auto w-full max-w-6xl px-6 py-20">
             <p className="eyebrow">How a portfolio engagement runs</p>
-            <h2 className="mt-4 text-3xl font-light tracking-tight md:text-5xl">
+            <h2 className="mt-4 text-3xl font-light tracking-tight md:text-5xl lg:text-6xl">
               Quote to invoice in four steps.
             </h2>
             <ol className="mt-12 grid grid-cols-1 gap-px border border-line/60 bg-line/60 sm:grid-cols-2 lg:grid-cols-4">
@@ -273,7 +257,7 @@ export default async function About() {
             <div className="mt-9 flex flex-wrap items-center justify-center gap-5">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 bg-gold px-8 py-3.5 text-sm uppercase tracking-[0.18em] text-background transition-colors hover:bg-gold-bright"
+                className="inline-flex items-center gap-3 bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
               >
                 Contact us for a quote
               </Link>

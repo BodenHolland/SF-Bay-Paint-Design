@@ -43,6 +43,7 @@ export const SOCIALS = [
 // Top-level navigation. No standalone estimator route; the contact page handles
 // quote requests for now.
 export const NAV = [
+  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -103,7 +104,7 @@ export const SERVICES: Service[] = [
     summary:
       "Stucco, wood, vinyl, aluminum, brick, and cedar shingles. The right primer for each substrate, two coats over real prep, finished on schedule.",
     body: "Our crews paint every exterior substrate common in the Bay Area, including stucco, wood siding, vinyl, aluminum, brick, cedar shingles, garage doors, and trim. Each surface gets the right primer and two coats of mid-grade professional paint. We work in weather windows that don't compromise the finish, and we document the job with before-and-after photos that go with the invoice.",
-    photo: "/photos/services/exterior-painting.jpg",
+    photo: "/photos/services/exterior-painting.jpg?v=2",
   },
   {
     slug: "power-washing",
@@ -112,7 +113,7 @@ export const SERVICES: Service[] = [
     summary:
       "Required prep on every exterior job. Removes dirt, mildew, chalking, and failing paint so the new coat actually bonds.",
     body: "Power washing is the first step on every exterior repaint we do. We remove dirt, mildew, chalking, and any old paint that's already failing, so the new coat bonds to a clean surface. We also offer standalone power-washing for buildings that aren't ready for paint but need their siding and walkways cleaned.",
-    photo: "/photos/services/power-washing.jpg",
+    photo: "/photos/services/power-washing.jpg?v=4",
   },
   {
     slug: "stucco-repair",
@@ -121,7 +122,7 @@ export const SERVICES: Service[] = [
     summary:
       "Patch cracks, address EIFS, then paint. Common in the Bay; we don't subcontract this out and we don't paint over a substrate that's about to fail.",
     body: "Stucco and EIFS (synthetic stucco) are everywhere in Bay Area buildings, and both fail in predictable ways. We patch cracks, address spalling, and repair EIFS using the right material for the substrate, then prime and paint. We don't paint over stucco that's actively failing — we fix it first or tell you what's needed before paint goes on.",
-    photo: "/photos/services/stucco-repair.jpg",
+    photo: "/photos/services/stucco-repair.jpg?v=2",
   },
   {
     slug: "siding-restoration",
@@ -130,7 +131,7 @@ export const SERVICES: Service[] = [
     summary:
       "Vinyl, aluminum, and Hardie siding. The right primer for each substrate so the paint doesn't chip off a year later.",
     body: "Painting vinyl and aluminum siding is its own skill — wrong primer and the paint peels in a season. Our crews use bonding primers and exterior acrylics rated for the substrate, with the right surface prep so the finish actually lasts. The same applies to Hardie and other cementitious siding.",
-    photo: "/photos/services/siding-restoration.jpg",
+    photo: "/photos/services/siding-restoration.jpg?v=2",
   },
   {
     slug: "deck-staining",
@@ -139,7 +140,7 @@ export const SERVICES: Service[] = [
     summary:
       "Strip, sand, stain. Restoring weathered redwood and cedar without replacing the boards.",
     body: "Decks and fences in Marin and the Bay weather fast. We strip old finish, sand back to clean wood, and apply transparent, semi-transparent, or solid stain depending on how the boards look and how often you want to refinish. Deck rebuilds and board replacement are handled by partners we trust if the structure isn't worth saving.",
-    photo: "/photos/services/deck-staining.jpg",
+    photo: "/photos/services/deck-staining.jpg?v=2",
   },
 
   // ── Interior ────────────────────────────────────────────────────────
@@ -150,7 +151,7 @@ export const SERVICES: Service[] = [
     summary:
       "Walls, ceilings, doors, and trim. Patch, prime, two coats of mid-grade professional paint. Cut by hand.",
     body: "Interior painting is the workhorse service: unit turnovers, multi-family common areas (lobbies, halls, stairwells, amenity rooms), and commercial interiors. We patch and prime, then apply two coats of mid-grade professional paint (Benjamin Moore Regal or Sherwin Williams SuperPaint). Walls cut and rolled, ceilings sprayed where appropriate, trim painted by hand.",
-    photo: "/photos/services/interior-painting.jpg",
+    photo: "/photos/services/interior-painting.jpg?v=4",
   },
   {
     slug: "cabinet-repainting",
@@ -159,7 +160,7 @@ export const SERVICES: Service[] = [
     summary:
       "Kitchen and bath cabinets refinished between tenancies. Sanded, primed, and sprayed for a smooth, durable finish.",
     body: "Cabinets are some of the most touched surfaces in a unit, and replacing them between tenancies isn't always worth it. We refinish kitchen and bath cabinets: degrease, sand, prime with a bonding primer, and spray a durable finish coat in a controlled space. The result holds up to daily use without looking like a cheap repaint.",
-    photo: "/photos/services/cabinet-repainting.jpg",
+    photo: "/photos/services/cabinet-repainting.jpg?v=2",
   },
   {
     slug: "drywall-repair",
@@ -168,7 +169,7 @@ export const SERVICES: Service[] = [
     summary:
       "Holes, water damage, settling cracks: patched, taped, textured to match before paint goes on.",
     body: "Standard part of any unit turnover. We patch holes from screws and anchors, address water damage and bubbled tape, repair settling cracks, and re-texture the patch to match the surrounding wall before paint. We can also handle larger repairs — medium-to-large holes that need a backing board, sections of failed drywall, and water-damaged areas after the moisture source is fixed.",
-    photo: "/photos/services/drywall-repair.jpg",
+    photo: "/photos/services/drywall-repair.jpg?v=2",
   },
   {
     slug: "wallpaper-removal",
@@ -177,7 +178,7 @@ export const SERVICES: Service[] = [
     summary:
       "Steam, strip, skim coat, paint. We take dated units to rent-ready without a full renovation.",
     body: "Wallpaper removal is one of the more painful prep jobs in the trade — done badly, it leaves a wall that no paint can hide. We score, steam, strip, and skim coat the wall before any paint goes on. Older Bay Area units often have layers; we plan for that in the scope.",
-    photo: "/photos/services/wallpaper-removal.jpg",
+    photo: "/photos/services/wallpaper-removal.jpg?v=2",
   },
 ];
 

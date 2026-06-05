@@ -75,6 +75,15 @@ export default function RootLayout({
       className={`${grotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        {/* Run before paint to prevent the browser from restoring the
+            previous scroll position (which makes the hero appear
+            partly hidden behind the sticky header). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "if('scrollRestoration' in history){history.scrollRestoration='manual';}if(!location.hash){window.scrollTo(0,0);}",
+          }}
+        />
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>

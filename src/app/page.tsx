@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { BayAreaMap } from "@/components/bay-area-map";
 import { JsonLd } from "@/components/json-ld";
 import { getSiteUrl } from "@/lib/site-url";
 import { businessLd, websiteLd, faqLd } from "@/lib/structured-data";
@@ -22,6 +23,14 @@ const WORK_PHOTOS = [
   { src: "/photos/work/exterior.jpg", alt: "Exterior repaint" },
   { src: "/photos/work/kitchen.jpg", alt: "Kitchen interior" },
   { src: "/photos/work/alta-street.jpg", alt: "Alta Street project" },
+  {
+    src: "/photos/work/modern-orange-living-room.jpg",
+    alt: "Modern living room with orange accent wall",
+  },
+  {
+    src: "/photos/work/teal-living-room.jpg",
+    alt: "Mid-century living room with teal accent wall",
+  },
   { src: "/photos/work/dining-area.jpg", alt: "Dining area interior" },
   { src: "/photos/work/marketing.jpg", alt: "Recent project" },
 ];
@@ -78,7 +87,7 @@ function Hero() {
         </div>
         <div>
           <h1
-            className="rise text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl"
+            className="rise text-4xl font-bold leading-[1.03] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
             style={{ animationDelay: "0.1s" }}
           >
             The Bay Area&rsquo;s painting and turnover crew.
@@ -125,7 +134,7 @@ function Services() {
     <section id="services" className="bg-charcoal/40">
       <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
         <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
             Our services include
           </h2>
         </div>
@@ -134,8 +143,7 @@ function Services() {
           const items = servicesByCategory(cat.key);
           return (
             <div key={cat.key} className="mt-16">
-              <p className="eyebrow">{cat.eyebrow}</p>
-              <h3 className="mt-3 text-2xl font-bold tracking-tight md:text-3xl">
+              <h3 className="text-2xl font-bold tracking-tight md:text-3xl">
                 {cat.title} painting
               </h3>
               <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -194,7 +202,7 @@ function Work() {
   return (
     <section className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
       <div className="text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+        <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
           Our work
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-sm text-muted">
@@ -308,7 +316,7 @@ function Locations() {
       <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
         <div className="text-center">
           <p className="eyebrow">Where we work</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
             Across the SF Bay Area.
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted">
@@ -316,13 +324,9 @@ function Locations() {
             the counties below.
           </p>
         </div>
-        <ul className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-x-6 gap-y-3 text-base text-foreground/80">
-          {LOCATIONS.map((county) => (
-            <li key={county} className="tabular-nums">
-              {county} County
-            </li>
-          ))}
-        </ul>
+        <div className="mt-14">
+          <BayAreaMap />
+        </div>
       </div>
     </section>
   );
@@ -333,7 +337,7 @@ function Testimonials() {
   return (
     <section className="bg-charcoal/40">
       <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
-        <h2 className="text-center text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+        <h2 className="text-center text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
           Satisfied customers
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-center text-sm text-muted">
@@ -362,7 +366,7 @@ function Testimonials() {
 function Faq() {
   return (
     <section className="mx-auto w-full max-w-3xl px-6 py-20 md:py-28">
-      <h2 className="text-center text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+      <h2 className="text-center text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
         Frequently asked
       </h2>
       <div className="mt-12">

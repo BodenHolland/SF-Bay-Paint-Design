@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
     "/opengraph-image": ["./src/app/_og/fonts/**"],
     "/twitter-image": ["./src/app/_og/fonts/**"],
   },
+  images: {
+    // Allow any local image path, with or without a ?v= cache-buster query
+    // (used to force browsers to refetch swapped service photos). Omitting
+    // `search` means any query string is permitted.
+    localPatterns: [{ pathname: "/**" }],
+  },
 };
 
 export default nextConfig;

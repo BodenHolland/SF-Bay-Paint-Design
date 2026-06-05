@@ -29,9 +29,8 @@ export default async function ContactPage() {
       <main id="main-content" tabIndex={-1} className="flex-1">
         <section className="border-b border-line/60">
           <div className="mx-auto w-full max-w-6xl px-6 pb-12 pt-20">
-            <p className="eyebrow rise">Get in touch</p>
             <h1
-              className="rise mt-5 max-w-3xl text-4xl font-light leading-[1.08] tracking-tight md:text-6xl"
+              className="rise max-w-5xl text-5xl font-light leading-[1.04] tracking-tight md:text-7xl lg:text-8xl"
               style={{ animationDelay: "0.1s" }}
             >
               Tell us about the property.

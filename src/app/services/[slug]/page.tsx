@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
@@ -57,9 +58,8 @@ export default async function ServiceDetail({
       <main id="main-content" tabIndex={-1} className="flex-1">
         <section className="border-b border-line/60">
           <div className="mx-auto w-full max-w-6xl px-6 pb-12 pt-20">
-            <p className="eyebrow rise">{categoryLabel} services</p>
             <h1
-              className="rise mt-5 max-w-3xl text-4xl font-light leading-[1.08] tracking-tight md:text-6xl"
+              className="rise mt-5 max-w-5xl text-5xl font-light leading-[1.04] tracking-tight md:text-7xl lg:text-8xl"
               style={{ animationDelay: "0.1s" }}
             >
               {service.title}
@@ -76,7 +76,7 @@ export default async function ServiceDetail({
             >
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 bg-gold px-8 py-3.5 text-sm uppercase tracking-[0.18em] text-background transition-colors hover:bg-gold-bright"
+                className="inline-flex items-center gap-3 bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
               >
                 Contact us for a quote
               </Link>
@@ -90,6 +90,24 @@ export default async function ServiceDetail({
             </div>
           </div>
         </section>
+
+        {/* Hero image */}
+        {service.photo && (
+          <section className="border-b border-line/60">
+            <div className="mx-auto w-full max-w-6xl px-6 py-12">
+              <div className="relative aspect-[16/9] w-full overflow-hidden md:aspect-[21/9]">
+                <Image
+                  src={service.photo}
+                  alt={service.title}
+                  fill
+                  priority
+                  sizes="(max-width: 1152px) 100vw, 1152px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Detail body */}
         <section className="mx-auto w-full max-w-6xl px-6 py-16">
@@ -202,7 +220,7 @@ export default async function ServiceDetail({
             <div className="mt-9 flex flex-wrap items-center justify-center gap-5">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 bg-gold px-8 py-3.5 text-sm uppercase tracking-[0.18em] text-background transition-colors hover:bg-gold-bright"
+                className="inline-flex items-center gap-3 bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
               >
                 Contact us for a quote
               </Link>

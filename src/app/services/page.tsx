@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -28,9 +29,8 @@ export default function ServicesPage() {
       <main id="main-content" tabIndex={-1} className="flex-1">
         <section className="border-b border-line/60">
           <div className="mx-auto w-full max-w-6xl px-6 pb-12 pt-20">
-            <p className="eyebrow rise">Services</p>
             <h1
-              className="rise mt-5 max-w-3xl text-4xl font-light leading-[1.08] tracking-tight md:text-6xl"
+              className="rise max-w-5xl text-5xl font-light leading-[1.04] tracking-tight md:text-7xl lg:text-8xl"
               style={{ animationDelay: "0.1s" }}
             >
               Our services.
@@ -49,31 +49,47 @@ export default function ServicesPage() {
         {CATEGORIES.map((cat, ci) => (
           <section
             key={cat.key}
-            className={`${ci > 0 ? "border-t border-line/60" : ""} ${ci % 2 === 1 ? "bg-charcoal/30" : ""}`}
+            className={ci > 0 ? "border-t border-line/60" : ""}
           >
-            <div className="mx-auto w-full max-w-6xl px-6 py-20">
+            <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-24">
               <Reveal>
-                <div className="border-b border-line/60 pb-8">
-                  <p className="eyebrow">{cat.eyebrow}</p>
-                  <h2 className="mt-4 text-3xl font-light tracking-tight md:text-5xl">
+                <div className="text-center">
+                  <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                     {cat.title} painting
                   </h2>
                 </div>
               </Reveal>
-              <div className="mt-10 grid gap-px border border-line/60 bg-line/60 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
                 {servicesByCategory(cat.key).map((s, i) => (
                   <Reveal key={s.slug} delay={(i % 3) * 80}>
                     <Link
                       href={`/services/${s.slug}`}
-                      className="group flex h-full flex-col bg-background p-8 transition-colors hover:bg-charcoal/40"
+                      className="group flex h-full flex-col text-center"
                     >
-                      <p className="text-sm uppercase tracking-[0.14em] text-gold transition-colors group-hover:text-gold-bright">
+                      <div className="relative aspect-[4/3] w-full overflow-hidden">
+                        {s.photo ? (
+                          <Image
+                            src={s.photo}
+                            alt={s.title}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                          />
+                        ) : (
+                          <div
+                            className="photo-ph absolute inset-0"
+                            data-label={s.title}
+                            aria-hidden
+                          />
+                        )}
+                      </div>
+                      <h3 className="mt-7 text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-gold md:text-2xl">
                         {s.title}
-                      </p>
-                      <p className="mt-4 flex-1 text-sm leading-relaxed text-foreground/80">
+                      </h3>
+                      <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-muted">
                         {s.summary}
                       </p>
-                      <p className="mt-6 inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-foreground/60">
+                      <p className="mt-5 inline-flex items-center justify-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-foreground/55">
                         <span className="swipe-underline">More about this service</span>
                         <span
                           aria-hidden
@@ -103,7 +119,7 @@ export default function ServicesPage() {
             <div className="mt-9 flex flex-wrap items-center justify-center gap-5">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 bg-gold px-8 py-3.5 text-sm uppercase tracking-[0.18em] text-background transition-colors hover:bg-gold-bright"
+                className="inline-flex items-center gap-3 bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold"
               >
                 Contact us for a quote
               </Link>

@@ -160,7 +160,7 @@ export function ContactForm() {
             disabled={pending || status === "success"}
             max={6}
             scale={1.03}
-            className="bg-gold px-8 py-3.5 text-sm uppercase tracking-[0.18em] text-background transition-colors hover:bg-gold-bright disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-gold"
+            className="bg-foreground px-8 py-3.5 text-sm font-semibold text-background transition-colors hover:bg-gold disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:bg-foreground"
           >
             {pending || status === "success" ? "Sending…" : "Send message"}
           </TiltButton>
