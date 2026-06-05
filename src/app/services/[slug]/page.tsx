@@ -8,7 +8,7 @@ import { Reveal } from "@/components/reveal";
 import { JsonLd } from "@/components/json-ld";
 import { getSiteUrl } from "@/lib/site-url";
 import { breadcrumbLd } from "@/lib/structured-data";
-import { SERVICES, PROCESS, servicesByCategory } from "@/lib/site";
+import { SERVICES, PROCESS } from "@/lib/site";
 
 type Params = { slug: string };
 
@@ -41,9 +41,6 @@ export default async function ServiceDetail({
   if (!service) notFound();
 
   const categoryLabel = service.category === "exterior" ? "Exterior" : "Interior";
-  const related = servicesByCategory(service.category).filter(
-    (s) => s.slug !== service.slug,
-  );
 
   return (
     <>
@@ -182,30 +179,6 @@ export default async function ServiceDetail({
             </ol>
           </div>
         </section>
-
-        {/* Related services in the same category */}
-        {related.length > 0 && (
-          <section className="border-t border-line/60">
-            <div className="mx-auto w-full max-w-6xl px-6 py-16">
-              <Reveal>
-                <p className="eyebrow">Other {categoryLabel.toLowerCase()} services</p>
-              </Reveal>
-              <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
-                {related.map((r) => (
-                  <li key={r.slug}>
-                    <Link
-                      href={`/services/${r.slug}`}
-                      className="group inline-flex items-center gap-2 text-foreground/85 transition-colors hover:text-gold-bright"
-                    >
-                      <span className="swipe-underline">{r.title}</span>
-                      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-        )}
 
         {/* Closing CTA */}
         <section className="border-t border-line/60 bg-charcoal/30">

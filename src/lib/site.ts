@@ -154,6 +154,15 @@ export const SERVICES: Service[] = [
     photo: "/photos/services/interior-painting.jpg?v=4",
   },
   {
+    slug: "commercial-interior",
+    title: "Commercial Interior",
+    category: "interior",
+    summary:
+      "Offices, retail, and light commercial. Worked around your hours so business doesn't stop while we paint.",
+    body: "Commercial interiors run differently than residential. Tenants are working, equipment can't move, and the building keeps running during the project. Our crews work after-hours or in phases, mask carefully around fixtures and tech, and use low-VOC, low-odor paint suitable for occupied spaces. Common scope includes offices, retail, fitness studios, salons, medical (non-clinical), and HOA amenity rooms.",
+    photo: "/photos/services/commercial-interior.jpg?v=2",
+  },
+  {
     slug: "cabinet-repainting",
     title: "Cabinet Repainting",
     category: "interior",
@@ -179,6 +188,15 @@ export const SERVICES: Service[] = [
       "Steam, strip, skim coat, paint. We take dated units to rent-ready without a full renovation.",
     body: "Wallpaper removal is one of the more painful prep jobs in the trade — done badly, it leaves a wall that no paint can hide. We score, steam, strip, and skim coat the wall before any paint goes on. Older Bay Area units often have layers; we plan for that in the scope.",
     photo: "/photos/services/wallpaper-removal.jpg?v=2",
+  },
+  {
+    slug: "popcorn-ceiling-removal",
+    title: "Popcorn Ceiling Removal",
+    category: "interior",
+    summary:
+      "Scrape, repair, skim coat, prime. Removing dated popcorn ceilings without leaving a mess behind.",
+    body: "Bay Area housing built before 1990 is full of popcorn ceiling texture, and modern renters and buyers want it gone. We scrape the texture, repair any drywall damage underneath, skim coat to a smooth finish, and prime ready for paint. Pre-1980 buildings often need an asbestos test before any scraping starts — we coordinate the inspection and any required abatement before our crews touch the surface.",
+    photo: "/photos/services/popcorn-ceiling-removal.jpg?v=2",
   },
 ];
 

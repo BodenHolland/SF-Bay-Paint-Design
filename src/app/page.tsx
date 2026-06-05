@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { BayAreaMap } from "@/components/bay-area-map";
+import { WorkGallery } from "@/components/work-gallery";
 import { JsonLd } from "@/components/json-ld";
 import { getSiteUrl } from "@/lib/site-url";
 import { businessLd, websiteLd, faqLd } from "@/lib/structured-data";
@@ -57,11 +58,11 @@ export default function Home() {
       <main id="main-content" tabIndex={-1} className="flex-1">
         <Hero />
         <Services />
-        <Work />
         <Trust />
+        <Work />
+        <Testimonials />
         <ForPm />
         <Locations />
-        <Testimonials />
         <Faq />
         <CtaBand />
       </main>
@@ -209,24 +210,7 @@ function Work() {
           A few recent jobs across the Bay Area.
         </p>
       </div>
-      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {WORK_PHOTOS.map((p, i) => (
-          <div
-            key={p.src}
-            className={`relative overflow-hidden ${
-              i === 0 ? "aspect-[4/5] lg:row-span-2 lg:aspect-[3/4]" : "aspect-[4/3]"
-            }`}
-          >
-            <Image
-              src={p.src}
-              alt={p.alt}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover"
-            />
-          </div>
-        ))}
-      </div>
+      <WorkGallery photos={WORK_PHOTOS} />
     </section>
   );
 }
