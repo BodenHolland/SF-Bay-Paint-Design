@@ -18,7 +18,7 @@ export function SiteHeader() {
             width={384}
             height={200}
             preload
-            className="h-12 w-auto md:h-14"
+            className="h-20 w-auto md:h-28"
           />
         </Link>
 

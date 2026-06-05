@@ -137,14 +137,6 @@ export const SERVICES: Service[] = [
     body: "Decks and fences in Marin and the Bay weather fast. We strip old finish, sand back to clean wood, and apply transparent, semi-transparent, or solid stain depending on how the boards look and how often you want to refinish. Deck rebuilds and board replacement are handled by partners we trust if the structure isn't worth saving.",
     photo: "/photos/services/deck-staining.jpg",
   },
-  {
-    slug: "epa-lead-safe",
-    title: "EPA Lead-Safe Practices",
-    category: "exterior",
-    summary:
-      "Older Bay Area buildings often have lead paint. Our crews follow EPA RRP lead-safe work practices on any job that disturbs it.",
-    body: "Bay Area housing stock is old. Pre-1978 buildings commonly have lead-based paint, and disturbing it without lead-safe practices is a legal and health risk. Our crews follow EPA RRP lead-safe work practices: containment, controlled removal, HEPA cleanup, and clearance. We provide documentation suitable for owner files and disclosures.",
-  },
 
   // ── Interior ────────────────────────────────────────────────────────
   {
